@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
     String getUserByIdSql="select user_id, login, password, description from app_user where user_id= :p_user_id";
     String addUserSql="insert into app_user(login, password,description) values(:login, :password, :description)";
     String deleteUserSql="delete from app_user where user_id=:p_user_id";
-    String updateUserSql="update app_user set user_id=:user_id, login=:login, password=:password, description=:description where user_id=:userId";
+    String updateUserSql="update app_user set user_id=:user_id, login=:login, password=:password, description=:description where user_id=:p user_id";
 
 
 
@@ -64,6 +64,7 @@ public class UserDaoImpl implements UserDao {
         return keyHolder.getKey().intValue();
     }
 
+    // it's have mistake
     @Override
     public void updateUser(User user) {
 

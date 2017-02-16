@@ -64,8 +64,9 @@ public class UserDaoImplTest {
 
     @Test
     public void deleteUser() throws Exception {
+        System.out.println(userDao.getAllUsers().size());
         userDao.deleteUser(1);
-        TestCase.assertEquals(null,userDao.getUserById(1));
+        assertEquals(1,userDao.getAllUsers().size());
 
 
     }

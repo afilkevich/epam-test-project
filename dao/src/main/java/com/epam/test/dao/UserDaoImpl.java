@@ -4,14 +4,19 @@ import com.epam.test.model.User;
 import com.epam.test.model.UserDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by master on 15.2.17.
@@ -24,7 +29,7 @@ public class UserDaoImpl implements UserDao {
     String getUserByIdSql="select user_id, login, password, description from app_user where user_id= :p_user_id";
     String addUserSql="insert into app_user(login, password,description) values(:login, :password, :description)";
     String deleteUserSql="delete from app_user where user_id=:p_user_id";
-    String updateUserSql="update app_user set login=:login, password=:password, description=:description where user_id=:p_user_id";
+    String updateUserSql="update app_user set user_id=:user_id, login=:login, password=:password, description=:description where user_id=:userId";
 
 
 
@@ -49,11 +54,27 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Integer addUser(User user) {
-        return null;
+        MapSqlParameterSource parameterSource=new MapSqlParameterSource();
+        parameterSource.addValue("login",user.getLogin());
+        parameterSource.addValue("password",user.getPassword());
+        parameterSource.addValue("description",user.getDescription());
+        KeyHolder keyHolder=new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(addUserSql,parameterSource,keyHolder);
+
+        return keyHolder.getKey().intValue();
     }
 
     @Override
     public void updateUser(User user) {
+
+        Map<String,Object> userParametrs=new HashMap<>();
+        userParametrs.put("id",user.getUserId());
+        userParametrs.put("login",user.getLogin());
+        userParametrs.put("password",user.getPassword());
+        userParametrs.put("description", user.getDescription());
+
+
+        namedParameterJdbcTemplate.update(updateUserSql,userParametrs);
 
     }
 

@@ -54,11 +54,12 @@ public class UserDaoImplTest {
 
     @Test
     public void updateUser() throws Exception {
-        User user=userDao.getUserById(1);
+
+        User user=userDao.getUserById(2);
         String oldPass=user.getPassword();
         user.setPassword("newPAss");
         userDao.updateUser(user);
-        assertNotEquals(oldPass,userDao.getUserById(1).getPassword());
+        assertNotEquals(oldPass,userDao.getUserById(2).getPassword());
 
     }
 

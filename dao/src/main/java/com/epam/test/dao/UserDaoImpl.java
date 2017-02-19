@@ -2,6 +2,10 @@ package com.epam.test.dao;
 
 import com.epam.test.model.User;
 import com.epam.test.model.UserDao;
+import org.apache.logging.log4j.LogManager;
+
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -22,6 +26,11 @@ import java.util.Map;
  * Created by master on 15.2.17.
  */
 public class UserDaoImpl implements UserDao {
+
+    private static final Logger LOGGER= LogManager.getLogger();
+
+
+
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -29,8 +38,7 @@ public class UserDaoImpl implements UserDao {
     String getUserByIdSql="select user_id, login, password, description from app_user where user_id= :p_user_id";
     String addUserSql="insert into app_user(login, password,description) values(:login, :password, :description)";
     String deleteUserSql="delete from app_user where user_id=:p_user_id";
-    String updateUserSql="update app_user set user_id=:user_id, login=:login, password=:password, description=:description where user_id=:p user_id";
-
+    String updateUserSql="update app_user set  login=:login, password=:password, description=:description where user_id=:id";
 
 
     public UserDaoImpl(DataSource dataSource) {
@@ -41,12 +49,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
+        LOGGER.debug("getAllUser");
 
         return jdbcTemplate.query(getAllUsersSql,new UserRowMapper());
     }
 
     @Override
     public User getUserById(Integer userId) {
+        LOGGER.debug("getUserById",userId);
         SqlParameterSource namedParametrs=new MapSqlParameterSource("p_user_id",userId);
         User user=namedParameterJdbcTemplate.queryForObject(getUserByIdSql,namedParametrs,new UserRowMapper());
         return user;
@@ -54,6 +64,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Integer addUser(User user) {
+        LOGGER.debug("addUser",user);
         MapSqlParameterSource parameterSource=new MapSqlParameterSource();
         parameterSource.addValue("login",user.getLogin());
         parameterSource.addValue("password",user.getPassword());
@@ -64,23 +75,27 @@ public class UserDaoImpl implements UserDao {
         return keyHolder.getKey().intValue();
     }
 
-    // it's have mistake
+
     @Override
     public void updateUser(User user) {
-
-        Map<String,Object> userParametrs=new HashMap<>();
-        userParametrs.put("id",user.getUserId());
-        userParametrs.put("login",user.getLogin());
-        userParametrs.put("password",user.getPassword());
-        userParametrs.put("description", user.getDescription());
+         LOGGER.debug("updateUser",user);
 
 
-        namedParameterJdbcTemplate.update(updateUserSql,userParametrs);
+            MapSqlParameterSource mapSqlParameterSource=new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("id",user.getUserId());
+        mapSqlParameterSource.addValue("login",user.getLogin());
+        mapSqlParameterSource.addValue("password",user.getPassword());
+        mapSqlParameterSource.addValue("description",user.getDescription());
+
+
+
+        namedParameterJdbcTemplate.update(updateUserSql,mapSqlParameterSource);
 
     }
 
     @Override
     public void deleteUser(Integer userId) {
+        LOGGER.debug("deleteUser",userId);
         SqlParameterSource namedParametrs=new MapSqlParameterSource("p_user_id",userId);
         namedParameterJdbcTemplate.update(deleteUserSql,namedParametrs);
     }

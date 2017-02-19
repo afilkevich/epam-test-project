@@ -2,8 +2,8 @@ package com.epam.test.dao;
 
 import com.epam.test.model.User;
 import com.epam.test.model.UserDao;
-import junit.framework.Assert;
-import junit.framework.TestCase;
+
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotSame;
+
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotEquals;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -54,12 +53,12 @@ public class UserDaoImplTest {
 
     @Test
     public void updateUser() throws Exception {
-
-        User user=userDao.getUserById(2);
-        String oldPass=user.getPassword();
-        user.setPassword("newPAss");
+        User user=new User(2,"newLog","newPAss","newDesc");
         userDao.updateUser(user);
-        assertNotEquals(oldPass,userDao.getUserById(2).getPassword());
+        User newUser=userDao.getUserById(user.getUserId());
+        assertEquals(user.getPassword(),newUser.getPassword());
+
+
 
     }
 

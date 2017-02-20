@@ -36,6 +36,8 @@ public class UserDaoImpl implements UserDao {
 
     String getAllUsersSql="select user_id, login, password, description from app_user";
     String getUserByIdSql="select user_id, login, password, description from app_user where user_id= :p_user_id";
+    //@Value("${user.selectById")
+    //String getUserByIdSql;
     String addUserSql="insert into app_user(login, password,description) values(:login, :password, :description)";
     String deleteUserSql="delete from app_user where user_id=:p_user_id";
     String updateUserSql="update app_user set  login=:login, password=:password, description=:description where user_id=:id";

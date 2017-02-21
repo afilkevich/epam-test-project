@@ -4,7 +4,6 @@ import com.epam.test.model.User;
 import com.epam.test.model.UserDao;
 
 
-import junit.framework.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
@@ -32,7 +31,8 @@ public class UserDaoImplTest {
 
     static  final String USER_LOGIN_1="userLogin1";
 
-    private  static final User user=new User("userLofin3","userPassword3");
+    private  static final User user=new User("userLogin3","userPassword3");
+
     @Autowired
     UserDao userDao;
 
@@ -77,6 +77,15 @@ public class UserDaoImplTest {
     }
 
     @Test
+    public void getUserByLogin() throws Exception{
+        LOGGER.debug("test: getUserByLogin");
+
+        User user=userDao.getUserbyLogin(USER_LOGIN_1);
+        assertNotNull(user);
+        assertEquals(USER_LOGIN_1,user.getLogin());
+    }
+
+    @Test
     public void addUserTest() throws Exception {
         LOGGER.debug("test: addUserTest");
 
@@ -102,7 +111,8 @@ public class UserDaoImplTest {
         User user=userDao.getUserById(1);
         user.setPassword("updatePass");
         user.setDescription("updateDescr");
-        userDao.updateUser(user);
+        int count=userDao.updateUser(user);
+        assertEquals(1,count);
 
         User updateUser=userDao.getUserById(1);
         assertTrue(user.getLogin().equals(updateUser.getLogin()));
@@ -115,9 +125,9 @@ public class UserDaoImplTest {
     @Test(expected = org.springframework.dao.DuplicateKeyException.class)
     public void testAddDuplicateUser() throws Exception{
         LOGGER.debug("test: testAddDuplicateUser()");
-        User xuser=new User("userz","pass2");
-        xuser.setUserId(1);
-        userDao.addUser(xuser);
+        User xUser=new User("userz","pass2");
+        xUser.setUserId(1);
+        userDao.addUser(xUser);
     }
 
     @Test
@@ -130,7 +140,8 @@ public class UserDaoImplTest {
         List<User> users=userDao.getAllUsers();
         Integer addusers=users.size();
 
-        userDao.deleteUser(idUser);
+        int count=userDao.deleteUser(idUser);
+        assertEquals(1,count);
 
         users=userDao.getAllUsers();
 

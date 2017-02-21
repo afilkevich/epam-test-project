@@ -1,5 +1,7 @@
 package com.epam.test.model;
 
+import org.springframework.dao.DataAccessException;
+
 import java.util.List;
 
 /**
@@ -7,14 +9,15 @@ import java.util.List;
  */
 public interface UserDao {
 
-    public List<User> getAllUsers();
+     List<User> getAllUsers() throws DataAccessException;
 
-    public User getUserById(Integer userId);
+     User getUserById(Integer userId) throws DataAccessException;
+    User getUserbyLogin(String login) throws DataAccessException;
 
-    public Integer addUser(User user);
+     Integer addUser(User user) throws DataAccessException;
 
-    public void updateUser(User user);
+    int updateUser(User user) throws DataAccessException;
 
-    public void deleteUser(Integer userId);
+    int deleteUser(Integer userId) throws DataAccessException;
 
 }

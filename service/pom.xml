@@ -13,6 +13,14 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.test</groupId>
+            <artifactId>service-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.test</groupId>
+            <artifactId>dao-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.test</groupId>
             <artifactId>dao</artifactId>
         </dependency>
         <dependency>
@@ -21,7 +29,24 @@
         </dependency>
         <dependency>
             <groupId>com.epam.test</groupId>
-            <artifactId>service-api</artifactId>
+            <artifactId>test-db</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
         </dependency>
 
     </dependencies>

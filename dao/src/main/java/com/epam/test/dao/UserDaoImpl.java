@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -38,6 +39,7 @@ public class UserDaoImpl implements UserDao {
     String getUserByIdSql="select user_id, login, password, description from app_user where user_id= :p_user_id";
     //@Value("${user.selectById")
     //String getUserByIdSql;
+    String getUserByLoginSql="select user_id, login, password, description from app_user where lower(login)=lower(:p_login)";
     String addUserSql="insert into app_user(login, password,description) values(:login, :password, :description)";
     String deleteUserSql="delete from app_user where user_id=:p_user_id";
     String updateUserSql="update app_user set  login=:login, password=:password, description=:description where user_id=:id";
@@ -51,22 +53,30 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        LOGGER.debug("getAllUser");
+        LOGGER.debug("getAllUser()");
 
         return jdbcTemplate.query(getAllUsersSql,new UserRowMapper());
     }
 
     @Override
     public User getUserById(Integer userId) {
-        LOGGER.debug("getUserById",userId);
+        LOGGER.debug("getUserById()",userId);
         SqlParameterSource namedParametrs=new MapSqlParameterSource("p_user_id",userId);
         User user=namedParameterJdbcTemplate.queryForObject(getUserByIdSql,namedParametrs,new UserRowMapper());
         return user;
     }
 
     @Override
+    public User getUserbyLogin(String login) throws DataAccessException {
+        LOGGER.debug("getUserByLogin()",login);
+        SqlParameterSource namedParametrs=new MapSqlParameterSource("p_login",login);
+        User user=namedParameterJdbcTemplate.queryForObject(getUserByLoginSql,namedParametrs,new UserRowMapper());
+        return user;
+    }
+
+    @Override
     public Integer addUser(User user) {
-        LOGGER.debug("addUser",user);
+        LOGGER.debug("addUser()",user);
         MapSqlParameterSource parameterSource=new MapSqlParameterSource();
         parameterSource.addValue("login",user.getLogin());
         parameterSource.addValue("password",user.getPassword());
@@ -79,11 +89,11 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public void updateUser(User user) {
-         LOGGER.debug("updateUser",user);
+    public int updateUser(User user) {
+         LOGGER.debug("updateUser()",user);
 
 
-            MapSqlParameterSource mapSqlParameterSource=new MapSqlParameterSource();
+        MapSqlParameterSource mapSqlParameterSource=new MapSqlParameterSource();
         mapSqlParameterSource.addValue("id",user.getUserId());
         mapSqlParameterSource.addValue("login",user.getLogin());
         mapSqlParameterSource.addValue("password",user.getPassword());
@@ -91,15 +101,15 @@ public class UserDaoImpl implements UserDao {
 
 
 
-        namedParameterJdbcTemplate.update(updateUserSql,mapSqlParameterSource);
+        return namedParameterJdbcTemplate.update(updateUserSql,mapSqlParameterSource);
 
     }
 
     @Override
-    public void deleteUser(Integer userId) {
-        LOGGER.debug("deleteUser",userId);
+    public int deleteUser(Integer userId) {
+        LOGGER.debug("deleteUser()",userId);
         SqlParameterSource namedParametrs=new MapSqlParameterSource("p_user_id",userId);
-        namedParameterJdbcTemplate.update(deleteUserSql,namedParametrs);
+       return namedParameterJdbcTemplate.update(deleteUserSql,namedParametrs);
     }
 
     private class UserRowMapper implements RowMapper<User>{

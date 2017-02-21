@@ -29,6 +29,10 @@ import java.util.Map;
 public class UserDaoImpl implements UserDao {
 
     private static final Logger LOGGER= LogManager.getLogger();
+    static final String USER_ID="user_id";
+    static final String LOGIN="login";
+    static final String PASSWORD="password";
+    static final String DESCRIPTION="description";
 
 
 
@@ -40,7 +44,7 @@ public class UserDaoImpl implements UserDao {
     //@Value("${user.selectById")
     //String getUserByIdSql;
     String getUserByLoginSql="select user_id, login, password, description from app_user where lower(login)=lower(:p_login)";
-    String addUserSql="insert into app_user(login, password,description) values(:login, :password, :description)";
+    String addUserSql="insert into app_user(user_id,login, password,description) values(:user_id, :login, :password, :description)";
     String deleteUserSql="delete from app_user where user_id=:p_user_id";
     String updateUserSql="update app_user set  login=:login, password=:password, description=:description where user_id=:id";
 
@@ -78,9 +82,10 @@ public class UserDaoImpl implements UserDao {
     public Integer addUser(User user) {
         LOGGER.debug("addUser()",user);
         MapSqlParameterSource parameterSource=new MapSqlParameterSource();
-        parameterSource.addValue("login",user.getLogin());
-        parameterSource.addValue("password",user.getPassword());
-        parameterSource.addValue("description",user.getDescription());
+        parameterSource.addValue(USER_ID,user.getUserId());
+        parameterSource.addValue(LOGIN,user.getLogin());
+        parameterSource.addValue(PASSWORD,user.getPassword());
+        parameterSource.addValue(DESCRIPTION,user.getDescription());
         KeyHolder keyHolder=new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(addUserSql,parameterSource,keyHolder);
 

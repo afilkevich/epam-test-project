@@ -33,6 +33,7 @@ public class UserDaoImplTest {
 
     private  static final User user=new User("userLogin3","userPassword3");
 
+
     @Autowired
     UserDao userDao;
 
@@ -122,7 +123,7 @@ public class UserDaoImplTest {
 
     }
 
-    @Test(expected = org.springframework.dao.DuplicateKeyException.class)
+ @Test(expected = org.springframework.dao.DuplicateKeyException.class)
     public void testAddDuplicateUser() throws Exception{
         LOGGER.debug("test: testAddDuplicateUser()");
         User xUser=new User("userz","pass2");

@@ -11,7 +11,7 @@
 
     <artifactId>dao-api</artifactId>
     <dependencies>
-           <dependency>
+        <dependency>
             <groupId>com.epam.test</groupId>
             <artifactId>model</artifactId>
         </dependency>

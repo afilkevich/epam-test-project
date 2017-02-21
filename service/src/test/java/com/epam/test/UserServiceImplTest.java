@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  * Created by master on 21.2.17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:service-test.xml"})
+@ContextConfiguration(locations = {"classpath:test-test.xml"})
 @Transactional
 public class UserServiceImplTest {
     @Autowired

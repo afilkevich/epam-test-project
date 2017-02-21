@@ -1,5 +1,6 @@
 package com.epam.test;
 
+import com.epam.test.UserService;
 import com.epam.test.model.User;
 import com.epam.test.model.UserDao;
 import org.apache.logging.log4j.LogManager;

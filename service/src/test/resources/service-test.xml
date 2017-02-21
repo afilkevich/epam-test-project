@@ -9,7 +9,7 @@
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:app.properties</value>
+
                 <value>classpath:database.properties</value>
             </list>
         </property>
@@ -19,7 +19,7 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="userService" class="com.epam.test.service.UserServiceImpl">
+    <bean id="userService" class="com.epam.test.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
 

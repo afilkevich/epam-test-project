@@ -39,14 +39,23 @@ public class UserDaoImpl implements UserDao {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    String getAllUsersSql="select user_id, login, password, description from app_user";
-    String getUserByIdSql="select user_id, login, password, description from app_user where user_id= :p_user_id";
-    //@Value("${user.selectById")
-    //String getUserByIdSql;
-    String getUserByLoginSql="select user_id, login, password, description from app_user where lower(login)=lower(:p_login)";
-    String addUserSql="insert into app_user(user_id,login, password,description) values(:user_id, :login, :password, :description)";
-    String deleteUserSql="delete from app_user where user_id=:p_user_id";
-    String updateUserSql="update app_user set  login=:login, password=:password, description=:description where user_id=:id";
+    @Value("${user.getAllUsers}")
+    String getAllUsersSql;
+
+    @Value("${user.selectById}")
+    String getUserByIdSql;
+
+    @Value("${user.selectByLogin}")
+    String getUserByLoginSql;
+
+    @Value("${user.addUser}")
+    String addUserSql;
+
+    @Value("${user.deleteUser}")
+    String deleteUserSql;
+
+    @Value("${user.updateUser}")
+    String updateUserSql;
 
 
     public UserDaoImpl(DataSource dataSource) {

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
+import java.util.IllegalFormatException;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
         Assert.isNull(user.getUserId(),"id should be null");
         Assert.hasText(user.getLogin(),"login should not be null");
         Assert.hasText(user.getPassword(),"password should not be null");
-        //Assert.isNull(userDao.getUserbyLogin(user.getLogin()),"login should be original");
+      
         return userDao.addUser(user);
 
     }

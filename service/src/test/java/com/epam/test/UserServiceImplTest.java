@@ -54,6 +54,7 @@ public class UserServiceImplTest {
 
     }
 
+
     @Test
     public void addUser() throws Exception {
         User user=new User("us3","pass3");

@@ -19,6 +19,7 @@
     <module>test-db</module>
     <module>web-app</module>
     <module>rest-app</module>
+    <module>client-api</module>
 
 
   </modules>

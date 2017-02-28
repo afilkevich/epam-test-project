@@ -75,7 +75,15 @@ public class UsersConsumerMockRestTest {
 
     @Test
     public void addUser() throws Exception{
-       
+        Integer expectedResult=3;
+        expect(mockRestTemplate.getForEntity(hostUrl+"/"+urlUser+"/"+user3,Integer.class)).
+                andReturn(new ResponseEntity<Integer>(3,HttpStatus.CREATED));
+        replay(mockRestTemplate);
+        usersConsumer.addUser(user3);
+        assertEquals((Integer)3,user3.getUserId());
+
+
+
     }
 
 

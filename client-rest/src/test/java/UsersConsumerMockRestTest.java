@@ -61,10 +61,23 @@ public class UsersConsumerMockRestTest {
 
         List<User> users=usersConsumer.getAllUsers();
         assertEquals(2,users.size());
-
     }
 
-    
+    @Test
+    public void getUserById() throws Exception{
+
+        expect(mockRestTemplate.getForEntity(hostUrl+"/"+urlUser+"/"+1,User.class))
+                .andReturn(new ResponseEntity<User>(user,HttpStatus.FOUND));
+        replay(mockRestTemplate);
+        usersConsumer.getUserById(1);
+        assertEquals((Integer) 1,user.getUserId());
+    }
+
+    @Test
+    public void addUser() throws Exception{
+       
+    }
+
 
     @Test
     public void getUserByLogin() throws Exception{

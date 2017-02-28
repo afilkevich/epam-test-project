@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Created by master on 25.2.17.
  */
+@RestController
 public class UserRestController {
 
     private static final Logger LOGGER= LogManager.getLogger();

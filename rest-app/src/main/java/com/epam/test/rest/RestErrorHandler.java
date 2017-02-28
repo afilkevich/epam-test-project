@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class RestErrorHandler {
 
-    private static final Logger LOGGER= LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
-    @ExceptionHandler
+    @ExceptionHandler(DataAccessException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public  @ResponseBody String handleDataAccesssException(DataAccessException ex){
-        LOGGER.debug("Handling DataAccessExceptiom: ",ex);
-        return "DataAccessException: "+ex.getLocalizedMessage();
+    public @ResponseBody String handleDataAccesssException(DataAccessException ex) {
+        LOGGER.debug("Handling DataAccessExceptiom: " + ex);
+        return "DataAccessException: " + ex.getLocalizedMessage();
     }
 }

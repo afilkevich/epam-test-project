@@ -14,11 +14,11 @@
     <module>model</module>
     <module>dao-api</module>
     <module>dao</module>
-    <module>test-db</module>
     <module>service-api</module>
     <module>service</module>
-      <module>web-app</module>
-      <module>rest-app</module>
+    <module>test-db</module>
+    <module>web-app</module>
+    <module>rest-app</module>
 
 
   </modules>
@@ -56,11 +56,6 @@
     </dependency>
     <dependency>
       <groupId>com.epam.test</groupId>
-      <artifactId>test-db</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.epam.test</groupId>
       <artifactId>service-api</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -69,12 +64,19 @@
       <artifactId>service</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+    <groupId>com.epam.test</groupId>
+    <artifactId>test-db</artifactId>
+    <version>${project.version}</version>
+  </dependency>
+
 
 
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>${servlet-api.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -187,6 +189,7 @@
             <target>${java.version}</target>
           </configuration>
         </plugin>
+
         <plugin>
           <groupId>org.eclipse.jetty</groupId>
           <artifactId>jetty-maven-plugin</artifactId>

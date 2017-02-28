@@ -1,5 +1,6 @@
 package com.epam.test.rest.test;
 
+
 import com.epam.test.rest.VersionController;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import javax.annotation.Resource;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,13 +22,13 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 
 
-import javax.annotation.Resource;
+
 
 /**
  * Created by master on 24.2.17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath*:test-spring-rest-mock.xml")
+@ContextConfiguration(locations = {"classpath*:test-spring-rest-mock.xml"})
 public class VersionControllerMockTest {
     @Resource
     private VersionController versionController;

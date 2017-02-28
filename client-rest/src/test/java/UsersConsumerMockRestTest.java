@@ -32,6 +32,7 @@ public class UsersConsumerMockRestTest {
 
     private static final User user=new User(1,"userLogin1","userPAssword1","");
     private static final User user3=new User(3,"userLogin3","userPAssword3","");
+    private static final User updUser=new User(1,"us1","pas1","");
     private static final String USER_LOGIN_3="userLogin3";
 
     @Autowired
@@ -75,15 +76,29 @@ public class UsersConsumerMockRestTest {
 
     @Test
     public void addUser() throws Exception{
-        Integer expectedResult=3;
         expect(mockRestTemplate.getForEntity(hostUrl+"/"+urlUser+"/"+user3,Integer.class)).
                 andReturn(new ResponseEntity<Integer>(3,HttpStatus.CREATED));
         replay(mockRestTemplate);
         usersConsumer.addUser(user3);
         assertEquals((Integer)3,user3.getUserId());
+    }
 
+    @Test
+    public void deleteUser() throws Exception{
+        expect(mockRestTemplate.getForEntity(hostUrl+"/"+urlUser+"/"+2,Integer.class))
+                .andReturn(new ResponseEntity<Integer>(1,HttpStatus.ACCEPTED));
+        replay(mockRestTemplate);
+        int a=usersConsumer.deleteUser(2);
+        assertEquals(1,a);
+    }
 
-
+    @Test
+    public void updateUser() throws Exception{
+        expect(mockRestTemplate.getForEntity(hostUrl+"/"+urlUser+"/"+updUser,Integer.class))
+                .andReturn(new ResponseEntity<Integer>(1,HttpStatus.OK));
+        replay(mockRestTemplate);
+        int a=usersConsumer.updateUser(updUser);
+        assertEquals(1,a);
     }
 
 

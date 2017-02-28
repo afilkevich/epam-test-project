@@ -61,11 +61,15 @@ public class UsersConsumerRest implements UsersConsumer {
 
     @Override
     public int updateUser(User user) throws ServerDataAccessException {
-        return 0;
+        ResponseEntity responseEntity=restTemplate.getForEntity(hostUrl+"/"+urlUser+"/"+user,Integer.class);
+        Object num=responseEntity.getBody();
+        return (Integer)num;
     }
 
     @Override
     public int deleteUser(Integer id) throws ServerDataAccessException {
-        return 0;
+        ResponseEntity responseEntity=restTemplate.getForEntity(hostUrl+"/"+urlUser+"/"+id,Integer.class);
+        Object num=responseEntity.getBody();
+        return (Integer) num;
     }
 }

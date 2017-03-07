@@ -1,6 +1,8 @@
 package com.epam.project.model;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by master on 5.3.17.
@@ -9,9 +11,9 @@ public class Vagon {
     Integer id;
     String type;
     int countOfSeat;
-    Date dateOfBuilder;
+    LocalDate dateOfBuilder;
 
-    public Vagon(Integer id, String type, int countOfSeat, Date dateOfBuilder) {
+    public Vagon(Integer id, String type, int countOfSeat, LocalDate dateOfBuilder) {
         this.id = id;
         this.type = type;
         this.countOfSeat = countOfSeat;
@@ -45,11 +47,37 @@ public class Vagon {
         this.countOfSeat = countOfSeat;
     }
 
-    public Date getDateOfBuilder() {
+    public LocalDate getDateOfBuilder() {
         return dateOfBuilder;
     }
 
-    public void setDateOfBuilder(Date dateOfBuilder) {
+    public void setDateOfBuilder(LocalDate dateOfBuilder) {
         this.dateOfBuilder = dateOfBuilder;
+    }
+
+    @Override
+    public String toString() {
+        return "Vagon{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", countOfSeat=" + countOfSeat +
+                ", dateOfBuilder=" + dateOfBuilder +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vagon vagon = (Vagon) o;
+        return countOfSeat == vagon.countOfSeat &&
+                Objects.equals(id, vagon.id) &&
+                Objects.equals(type, vagon.type) &&
+                Objects.equals(dateOfBuilder, vagon.dateOfBuilder);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, type, countOfSeat, dateOfBuilder);
     }
 }

@@ -1,6 +1,7 @@
 package com.epam.project.model;
 
-import java.util.List;
+
+import java.util.Objects;
 
 /**
  * Created by master on 5.3.17.
@@ -8,7 +9,7 @@ import java.util.List;
 public class Depo {
     Integer id;
     String name;
-    List<Vagon> vagons;
+
 
     public Depo() {
     }
@@ -33,11 +34,26 @@ public class Depo {
         this.name = name;
     }
 
-    public List<Vagon> getVagons() {
-        return vagons;
+
+    @Override
+    public String toString() {
+        return "Depo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 
-    public void setVagons(List<Vagon> vagons) {
-        this.vagons = vagons;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Depo depo = (Depo) o;
+        return Objects.equals(id, depo.id) &&
+                Objects.equals(name, depo.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

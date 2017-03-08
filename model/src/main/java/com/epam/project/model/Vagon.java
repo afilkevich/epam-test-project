@@ -10,17 +10,27 @@ import java.util.Objects;
 public class Vagon {
     Integer id;
     String type;
+    int depoId;
     int countOfSeat;
     LocalDate dateOfBuilder;
 
-    public Vagon(Integer id, String type, int countOfSeat, LocalDate dateOfBuilder) {
+    public Vagon(Integer id, String type, int depoId, int countOfSeat, LocalDate dateOfBuilder) {
         this.id = id;
         this.type = type;
+        this.depoId = depoId;
         this.countOfSeat = countOfSeat;
         this.dateOfBuilder = dateOfBuilder;
     }
 
     public Vagon() {
+    }
+
+    public int getDepoId() {
+        return depoId;
+    }
+
+    public void setDepoId(int depoId) {
+        this.depoId = depoId;
     }
 
     public Integer getId() {

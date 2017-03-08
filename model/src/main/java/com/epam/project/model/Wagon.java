@@ -7,14 +7,14 @@ import java.util.Objects;
 /**
  * Created by master on 5.3.17.
  */
-public class Vagon {
+public class Wagon {
     Integer id;
     String type;
     int depoId;
     int countOfSeat;
     LocalDate dateOfBuilder;
 
-    public Vagon(Integer id, String type, int depoId, int countOfSeat, LocalDate dateOfBuilder) {
+    public Wagon(Integer id, String type, int depoId, int countOfSeat, LocalDate dateOfBuilder) {
         this.id = id;
         this.type = type;
         this.depoId = depoId;
@@ -22,7 +22,7 @@ public class Vagon {
         this.dateOfBuilder = dateOfBuilder;
     }
 
-    public Vagon() {
+    public Wagon() {
     }
 
     public int getDepoId() {
@@ -67,7 +67,7 @@ public class Vagon {
 
     @Override
     public String toString() {
-        return "Vagon{" +
+        return "Wagon{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", countOfSeat=" + countOfSeat +
@@ -79,7 +79,7 @@ public class Vagon {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Vagon vagon = (Vagon) o;
+        Wagon vagon = (Wagon) o;
         return countOfSeat == vagon.countOfSeat &&
                 Objects.equals(id, vagon.id) &&
                 Objects.equals(type, vagon.type) &&

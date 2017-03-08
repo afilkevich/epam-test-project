@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.epam.project</groupId>
-  <artifactId>depo-vagon</artifactId>
+  <artifactId>depo-wagon</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 

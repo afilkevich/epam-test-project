@@ -20,6 +20,7 @@ import java.util.List;
 @ContextConfiguration(locations = {"classpath*:test-spring-dao.xml"})
 @Transactional
 public class DepoAndWagonImplTest {
+
     @Autowired
     DepoAndWagonDao depoAndWagonDao;
 

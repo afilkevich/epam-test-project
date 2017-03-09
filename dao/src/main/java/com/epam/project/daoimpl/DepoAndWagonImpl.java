@@ -48,9 +48,59 @@ public class DepoAndWagonImpl implements DepoAndWagonDao {
     }
 
     @Override
+    public Depo getDepoById(Integer id) throws DataAccessException {
+        return null;
+    }
+
+    @Override
+    public Integer addDepo(Depo depo) throws DataAccessException {
+        return null;
+    }
+
+    @Override
+    public int updateDepo(Depo depo) throws DataAccessException {
+        return 0;
+    }
+
+    @Override
+    public int deleteDepo(Integer id) throws DataAccessException {
+        return 0;
+    }
+
+    @Override
     public List<Wagon> getAllWagonByDepo(Integer id) throws DataAccessException {
         SqlParameterSource sqlParameterSource=new MapSqlParameterSource("d_id",id);
         return namedParameterJdbcTemplate.query(getAllWagonByDepoSql,sqlParameterSource,new WagonRowMapper());
+    }
+
+    @Override
+    public Integer addWagon(Wagon wagon) throws DataAccessException {
+        return null;
+    }
+
+    @Override
+    public int updateWagon(Wagon wagon) throws DataAccessException {
+        return 0;
+    }
+
+    @Override
+    public int deleteWagon(Integer id) throws DataAccessException {
+        return 0;
+    }
+
+    @Override
+    public int countWagonByDepo(Integer idDepo) throws DataAccessException {
+        return 0;
+    }
+
+    @Override
+    public int countOfSeatsByDepo(Integer idDepo) throws DataAccessException {
+        return 0;
+    }
+
+    @Override
+    public List<Wagon> getWagonByDate(LocalDate from, LocalDate to) throws DataAccessException {
+        return null;
     }
 
     private class DepoRowMapper implements RowMapper<Depo> {

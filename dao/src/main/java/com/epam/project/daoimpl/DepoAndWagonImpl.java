@@ -3,6 +3,8 @@ package com.epam.project.daoimpl;
 import com.epam.project.dao.DepoAndWagonDao;
 import com.epam.project.model.Depo;
 import com.epam.project.model.Wagon;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,6 +23,9 @@ import java.util.List;
  * Created by master on 9.3.17.
  */
 public class DepoAndWagonImpl implements DepoAndWagonDao {
+
+    private static final Logger LOGGER= LogManager.getLogger();
+
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -44,6 +49,7 @@ public class DepoAndWagonImpl implements DepoAndWagonDao {
 
     @Override
     public List<Depo> getAllDepo() throws DataAccessException {
+        LOGGER.debug("getallDepo");
         return jdbcTemplate.query(getAllDepoSql,new DepoRowMapper());
     }
 
@@ -69,6 +75,7 @@ public class DepoAndWagonImpl implements DepoAndWagonDao {
 
     @Override
     public List<Wagon> getAllWagonByDepo(Integer id) throws DataAccessException {
+        LOGGER.debug("getAllWagonByDepo",id);
         SqlParameterSource sqlParameterSource=new MapSqlParameterSource("d_id",id);
         return namedParameterJdbcTemplate.query(getAllWagonByDepoSql,sqlParameterSource,new WagonRowMapper());
     }

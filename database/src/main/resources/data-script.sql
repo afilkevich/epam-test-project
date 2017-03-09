@@ -1,9 +1,9 @@
-INSERT INTO app_depo(depo_Id,name)
+INSERT INTO app_depo(depo_id,name)
 VALUES
 (1, 'Minsk train depo'),
 (2, 'Brest train depo');
 
-INSERT INTO app_wagon(wagon_Id, type, d_Id,count_seats, date_build)
+INSERT INTO app_wagon(wagon_id, type, d_id,count_seats, date_build)
 VALUES
 (05642,'lux',1,18,'2015-08-11'),
 (14176, 'closed type', 1, 38, '1999-07-25'),

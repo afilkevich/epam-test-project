@@ -10,6 +10,10 @@ public class Depo {
     Integer id;
     String name;
 
+    public Depo(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Depo() {
     }

@@ -15,7 +15,7 @@
         </property>
     </bean>
 
-    <bean id="depoAndWagonDao" class="com.epam.project.daoimpl.DepoAndWagonDaoImpl">
+    <bean id="depoAndWagonDao" class="com.epam.project.daoimpl.DepoAndWagonImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
 

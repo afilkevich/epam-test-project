@@ -28,7 +28,7 @@ public class DepoAndWagonDaoImpl implements DepoAndWagonDao {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    
+
 
     @Override
     public List<Depo> getAllDepo() throws DataAccessException {

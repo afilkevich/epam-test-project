@@ -3,8 +3,13 @@ package com.epam.project.daoimpl;
 import com.epam.project.dao.DepoAndWagonDao;
 import com.epam.project.model.Depo;
 import com.epam.project.model.Wagon;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,6 +17,18 @@ import java.util.List;
  * Created by master on 9.3.17.
  */
 public class DepoAndWagonDaoImpl implements DepoAndWagonDao {
+
+    private static final Logger LOGGER= LogManager.getLogger();
+    private JdbcTemplate jdbcTemplate;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+
+    public DepoAndWagonDaoImpl(DataSource dataSource) {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+    }
+
+    
 
     @Override
     public List<Depo> getAllDepo() throws DataAccessException {

@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS app_depo;
+CREATE TABLE app_depo(
+depo_Id  INT NOT NULL AUTO_INCREMENT,
+name     VARCHAR(255) NOT NULL,
+PRIMARY KEY(depo_Id)
+);
+
+DROP TABLE IF EXISTS app_wagon;
+CREATE TABLE app_wagon(
+wagon_Id INT NOT NULL,
+type VARCHAR NOT NULL,
+d_Id INT NOT NULL,
+count_seats INT NOT NULL,
+date_build DATE NOT NULL,
+PRIMARY KEY(wagon_Id),
+FOREIGN KEY(d_Id) REFERENCES app_depo(depo_Id)
+);

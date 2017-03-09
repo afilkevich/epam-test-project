@@ -8,11 +8,11 @@ import java.util.Objects;
  * Created by master on 5.3.17.
  */
 public class Wagon {
-    Integer id;
-    String type;
-    int depoId;
-    int countOfSeat;
-    LocalDate dateOfBuilder;
+   private Integer id;
+   private String type;
+   private int depoId;
+   private int countOfSeat;
+   private LocalDate dateOfBuilder;
 
     public Wagon(Integer id, String type, int depoId, int countOfSeat, LocalDate dateOfBuilder) {
         this.id = id;

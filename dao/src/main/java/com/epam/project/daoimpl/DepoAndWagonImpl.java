@@ -52,6 +52,8 @@ public class DepoAndWagonImpl implements DepoAndWagonDao {
     String updateDepo;
     @Value("${depo.delete}")
     String deleteDepo;
+    @Value("${depo.deletecopywagons}")
+    String deleteCopyWagons;
     @Value("${wagon.select}")
     String getAllWagonByDepoSql;
 
@@ -96,7 +98,10 @@ public class DepoAndWagonImpl implements DepoAndWagonDao {
 
     @Override
     public int deleteDepo(Integer id) throws DataAccessException {
-      return 0;
+        LOGGER.debug("deletedepo",id);
+        SqlParameterSource sqlParameterSource=new MapSqlParameterSource("id",id);
+        namedParameterJdbcTemplate.update(deleteCopyWagons,sqlParameterSource);
+        return namedParameterJdbcTemplate.update(deleteDepo,sqlParameterSource);
     }
 
     @Override

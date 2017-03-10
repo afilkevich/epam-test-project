@@ -7,17 +7,22 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by master on 9.3.17.
@@ -39,6 +44,14 @@ public class DepoAndWagonImpl implements DepoAndWagonDao {
 
      @Value("${depo.select}")
     String getAllDepoSql;
+    @Value("${depo.selectbyid}")
+    String getDepoById;
+    @Value("${depo.add}")
+    String addDepo;
+    @Value("${depo.update}")
+    String updateDepo;
+    @Value("${depo.delete}")
+    String deleteDepo;
     @Value("${wagon.select}")
     String getAllWagonByDepoSql;
 
@@ -55,22 +68,35 @@ public class DepoAndWagonImpl implements DepoAndWagonDao {
 
     @Override
     public Depo getDepoById(Integer id) throws DataAccessException {
-        return null;
+        LOGGER.debug("getDepoById",id);
+        SqlParameterSource sqlParameterSource=new MapSqlParameterSource("id",id);
+        Depo depo=namedParameterJdbcTemplate.queryForObject(getDepoById,sqlParameterSource,new DepoRowMapper());
+        return depo;
     }
 
     @Override
     public Integer addDepo(Depo depo) throws DataAccessException {
-        return null;
+        LOGGER.debug("addDepo",depo);
+        MapSqlParameterSource mapSqlParameterSource=new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("id",depo.getId());
+        mapSqlParameterSource.addValue("name",depo.getName());
+        KeyHolder keyHolder=new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(addDepo,mapSqlParameterSource,keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     @Override
     public int updateDepo(Depo depo) throws DataAccessException {
-        return 0;
+        LOGGER.debug("updateDepo",depo);
+        MapSqlParameterSource mapSqlParameterSource=new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("id",depo.getId());
+        mapSqlParameterSource.addValue("name",depo.getName());
+        return namedParameterJdbcTemplate.update(updateDepo,mapSqlParameterSource);
     }
 
     @Override
     public int deleteDepo(Integer id) throws DataAccessException {
-        return 0;
+      return 0;
     }
 
     @Override

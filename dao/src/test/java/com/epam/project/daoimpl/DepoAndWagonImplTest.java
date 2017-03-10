@@ -23,6 +23,8 @@ import java.util.List;
 @Transactional
 public class DepoAndWagonImplTest {
 
+    private static final Depo depo=new Depo("Vitebsk wagon depo");
+
     private static final Logger LOGGER= LogManager.getLogger();
 
     @Autowired
@@ -36,10 +38,43 @@ public class DepoAndWagonImplTest {
     }
 
     @Test
+    public void getDepobyId() throws Exception
+    {
+       LOGGER.debug("test:getDepoById");
+        Depo depo=depoAndWagonDao.getDepoById(1);
+        Assert.assertTrue(depo.getId()==1);
+    }
+
+    @Test
+    public  void addDepo() throws Exception{
+        LOGGER.debug("test:addDepo");
+        Integer id=depoAndWagonDao.addDepo(depo);
+        Assert.assertNotNull(id);
+    }
+
+    @Test
+    public void updateDepo() throws Exception{
+        LOGGER.debug("test:updateDepo");
+        Depo uDepo=depoAndWagonDao.getDepoById(1);
+        uDepo.setName("Minsk's train depos");
+        int a=depoAndWagonDao.updateDepo(uDepo);
+        Assert.assertTrue(a==1);
+
+    }
+
+    @Test
+    public void deleteDepo() throws Exception{
+        LOGGER.debug("test:deleteDepo");
+         int exp=depoAndWagonDao.deleteDepo(1);
+        Assert.assertTrue(exp==1);
+    }
+
+    @Test
     public void getAllWagonByDepo() throws Exception {
         LOGGER.debug("test: getAllWagonByDepo");
         List<Wagon> wagons=depoAndWagonDao.getAllWagonByDepo(1);
         Assert.assertTrue(wagons.size()>0);
 
     }
+
 }

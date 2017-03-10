@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS app_depo;
 CREATE TABLE app_depo(
-depo_id  INT NOT NULL ,
+depo_id  INT NOT NULL AUTO_INCREMENT,
 name     VARCHAR(255) NOT NULL,
 PRIMARY KEY(depo_id)
 );

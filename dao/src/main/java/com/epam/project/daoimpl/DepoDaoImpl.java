@@ -33,11 +33,7 @@ public class DepoDaoImpl implements DepoDao {
 
     static final String DEPO_ID="depo_id";
     static final String DEPO_NAME="name";
-    static final String WAGON_ID="wagon_id";
-    static final String WAGON_TYPE="type";
-    static final String WAGON_ID_DEPO="d_id";
-    static final String WAGON_SEATS="count_seats";
-    static final String WAGON_DATE="date_build";
+
 
      @Value("${depo.select}")
     String getAllDepoSql;

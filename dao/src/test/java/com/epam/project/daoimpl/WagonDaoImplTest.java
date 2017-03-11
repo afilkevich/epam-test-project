@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -25,6 +26,8 @@ import static org.junit.Assert.*;
 public class WagonDaoImplTest {
     private static final Logger LOGGER= LogManager.getLogger();
 
+    private static final Wagon testWagon=new Wagon(23765,"opened type",1,52, LocalDate.parse("2001-09-10"));
+
 
     @Autowired
     WagonDao wagonDao;
@@ -37,4 +40,31 @@ public class WagonDaoImplTest {
 
     }
 
+
+    @Test
+    public void addWagon()  throws Exception{
+        LOGGER.debug("test:addWagon");
+        List<Wagon>oldList=wagonDao.getAllWagonByDepo(1);
+        wagonDao.addWagon(testWagon);
+        List<Wagon>nList=wagonDao.getAllWagonByDepo(1);
+        Assert.assertTrue(nList.size()==oldList.size()+1);
+    }
+
+    @Test
+    public void updateWagon() throws Exception
+    {
+        LOGGER.debug("test:update wagon");
+        Wagon wagon=wagonDao.getWagonById(23245);
+        wagon.setDepoId(1);
+        wagonDao.updateWagon(wagon);
+        Wagon wagon1=wagonDao.getWagonById(23245);
+        Assert.assertTrue(wagon.getDepoId()==wagon1.getDepoId());
+    }
+
+   @Test
+    public void getWagonById() throws Exception{
+        LOGGER.debug("test:getWagonById");
+        Wagon wagon=wagonDao.getWagonById( 14176);
+        Assert.assertNotNull(wagon);
+    }
 }

@@ -67,4 +67,34 @@ public class WagonDaoImplTest {
         Wagon wagon=wagonDao.getWagonById( 14176);
         Assert.assertNotNull(wagon);
     }
+
+    @Test
+    public void deleteWagon() throws Exception{
+        LOGGER.debug("test:deleteWagon");
+        int a=wagonDao.deleteWagon(14176);
+        Assert.assertEquals(1,a);
+    }
+    @Test
+    public void countWagonBydepo() throws Exception{
+        LOGGER.debug("test:countOfWagonBydepo");
+        int count=wagonDao.countWagonByDepo(1);
+        Assert.assertEquals(2,count);
+    }
+
+    @Test
+    public void sumOfSeatsByDepo() throws Exception{
+        LOGGER.debug("test:sumOfSeatsByDepo");
+        int sum=wagonDao.sumOfSeatsByDepo(2);
+        Assert.assertEquals(104,sum);
+    }
+
+    @Test
+    public void getWagonByDate() throws Exception{
+        LOGGER.debug("test:getWagonByDate");
+        List<Wagon> list=wagonDao.getWagonByDate(LocalDate.parse("2015-08-01"),LocalDate.parse("2016-09-01"));
+        Assert.assertEquals(2,list.size());
+
+    }
+
+
 }

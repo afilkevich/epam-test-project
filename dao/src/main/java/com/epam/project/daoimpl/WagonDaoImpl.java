@@ -11,8 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -44,6 +42,14 @@ public class WagonDaoImpl implements WagonDao {
     String getWagonIdSql;
     @Value("${wagon.update}")
     String updateWagonSql;
+    @Value("${wagon.delete}")
+    String deleteWagonSql;
+    @Value("${wagon.count}")
+    String countWagonSql;
+    @Value("${wagon.sum}")
+    String sumSeatsSql;
+    @Value("${wagon.selectbydate}")
+    String selectByDateSql;
 
     public WagonDaoImpl(DataSource dataSource) {
         jdbcTemplate =  new JdbcTemplate(dataSource);
@@ -92,22 +98,32 @@ public class WagonDaoImpl implements WagonDao {
 
     @Override
     public int deleteWagon(Integer id) throws DataAccessException {
-        return 0;
+        LOGGER.debug("deleteWagon",id);
+        SqlParameterSource sqlParameterSource=new MapSqlParameterSource("id",id);
+        return namedParameterJdbcTemplate.update(deleteWagonSql,sqlParameterSource);
     }
 
     @Override
-    public int countWagonByDepo(Integer idDepo) throws DataAccessException {
-        return 0;
+    public Integer countWagonByDepo(Integer idDepo) throws DataAccessException {
+        LOGGER.debug("countWagonByDepo",idDepo);
+        SqlParameterSource sqlParameterSource=new MapSqlParameterSource("id",idDepo);
+        return namedParameterJdbcTemplate.queryForObject(countWagonSql,sqlParameterSource,Integer.class);
     }
 
     @Override
-    public int countOfSeatsByDepo(Integer idDepo) throws DataAccessException {
-        return 0;
+    public Integer sumOfSeatsByDepo(Integer idDepo) throws DataAccessException {
+        LOGGER.debug("sumOfSeatsByDepo",idDepo);
+        SqlParameterSource sqlParameterSource=new MapSqlParameterSource("id",idDepo);
+        return namedParameterJdbcTemplate.queryForObject(sumSeatsSql,sqlParameterSource,Integer.class);
     }
 
     @Override
     public List<Wagon> getWagonByDate(LocalDate from, LocalDate to) throws DataAccessException {
-        return null;
+        LOGGER.debug("getWagonByDate",from,to);
+        MapSqlParameterSource sqlParameterSource=new MapSqlParameterSource();
+        sqlParameterSource.addValue("from",from);
+        sqlParameterSource.addValue("to",to);
+        return namedParameterJdbcTemplate.query(selectByDateSql,sqlParameterSource,new WagonRowMapper());
     }
 
     private class WagonRowMapper implements RowMapper<Wagon> {

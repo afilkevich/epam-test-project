@@ -39,17 +39,54 @@ public class WagonServiceImpl implements WagonService {
 
     @Override
     public void addWagon(Wagon wagon) throws DataAccessException {
+        LOGGER.debug("addWagon", wagon);
+        Assert.notNull(wagon,"wagon musn't be null");
+        Assert.notNull(wagon.getId(),"wagon must be have id");
+        Assert.hasText(wagon.getType(),"wagon must have id");
+        Assert.notNull(wagon.getDateOfBuilder(),"must have date");
+        try {
+            wagonDao.addWagon(wagon);
+        }
+        catch (Exception e){
+            LOGGER.debug("addWagon have exception",e);
+            throw new IllegalArgumentException();
+        }
 
     }
 
     @Override
     public Wagon getWagonById(Integer id) throws DataAccessException {
-        return null;
+        LOGGER.debug("getwagonById",id);
+        Assert.notNull(id);
+        Assert.isTrue(id>0);
+        Wagon wagon;
+        try {
+            wagon=wagonDao.getWagonById(id);
+            Assert.notNull(wagon);
+        }
+        catch (Exception e){
+            LOGGER.debug("getWagonById have Exception",e);
+            throw new IllegalArgumentException();
+        }
+        return wagon;
     }
 
     @Override
     public int updateWagon(Wagon wagon) throws DataAccessException {
-        return 0;
+        LOGGER.debug("updateWagon",wagon);
+        Assert.notNull(wagon);
+        Assert.isTrue(wagon.getId()>0);
+        Assert.hasText(wagon.getType(),"wagon must have type");
+        Assert.notNull(wagon.getDateOfBuilder(),"wagon must have date of build");
+        try {
+            Wagon testWagon=wagonDao.getWagonById(wagon.getId());
+            Assert.notNull(testWagon,"if update , than wagon must existed in db");
+        }
+        catch (Exception e){
+            LOGGER.debug("updateWagon have exception",wagon);
+            throw new IllegalArgumentException();
+        }
+        return wagonDao.updateWagon(wagon);
     }
 
     @Override

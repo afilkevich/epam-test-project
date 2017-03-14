@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -31,6 +32,9 @@ public class WagonServiceImplTest {
     @Autowired
     private WagonService wagonService;
 
+    private static final Wagon wagonTest=new Wagon(16245,"closed type",2,38, LocalDate.parse("2001-09-21"));
+
+
 
     @Test
     public void getAllWagonByDepo() throws Exception {
@@ -43,16 +47,30 @@ public class WagonServiceImplTest {
 
     @Test
     public void addWagon() throws Exception {
-
+        LOGGER.debug("test:addWagon");
+        List<Wagon> wagons=wagonService.getAllWagonByDepo(2);
+        int oldsize=wagons.size();
+        wagonService.addWagon(wagonTest);
+        wagons=wagonService.getAllWagonByDepo(2);
+        Assert.assertEquals(oldsize+1,wagons.size());
     }
 
     @Test
     public void getWagonById() throws Exception {
-
+        LOGGER.debug("test:getWagonById");
+        Wagon wagon=wagonService.getWagonById(14176);
+        Assert.assertNotNull(wagon);
+        Assert.assertEquals((Integer) 14176,wagon.getId());
     }
 
     @Test
     public void updateWagon() throws Exception {
+        LOGGER.debug("test:updateWagon");
+        Wagon wagon=wagonService.getWagonById(23245);
+        wagon.setDepoId(1);
+        int line=wagonService.updateWagon(wagon);
+        Assert.assertEquals(1,line);
+
 
     }
 

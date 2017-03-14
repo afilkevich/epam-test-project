@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="classpath*:spring-db.xml"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:wagon.properties</value>
+                <value>classpath:database.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="wagonDao" class="com.epam.project.daoimpl.WagonDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean id="wagonService" class="com.epam.project.serviceimpl.WagonServiceImpl">
+        <property name="wagonDao" ref="wagonDao"/>
+    </bean>
+
+</beans>

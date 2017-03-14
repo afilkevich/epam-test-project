@@ -91,21 +91,70 @@ public class WagonServiceImpl implements WagonService {
 
     @Override
     public int deleteWagon(Integer id) throws DataAccessException {
-        return 0;
+        LOGGER.debug("deleteWagon",id);
+        Assert.notNull(id);
+        Assert.isTrue(id>0);
+        Wagon wagon;
+        try {
+            wagon=wagonDao.getWagonById(id);
+            Assert.notNull(wagon);
+        }
+        catch (Exception e)
+        {
+            LOGGER.debug("deleteWAgon have exception",e);
+            throw new IllegalArgumentException();
+        }
+
+        return wagonDao.deleteWagon(id);
     }
 
     @Override
     public Integer countWagonByDepo(Integer idDepo) throws DataAccessException {
-        return null;
+        LOGGER.debug("countWagonByDepo",idDepo);
+        Assert.notNull(idDepo);
+        Assert.isTrue(idDepo>0);
+        int count=0;
+        try {
+            count=wagonDao.countWagonByDepo(idDepo);
+        }
+        catch (Exception e){
+            LOGGER.debug("countWagonByDepo have exception",e);
+            throw new IllegalArgumentException();
+        }
+        return count;
     }
 
     @Override
     public Integer sumOfSeatsByDepo(Integer idDepo) throws DataAccessException {
-        return null;
+        LOGGER.debug("sumOfSeatsByDepo",idDepo);
+        Assert.notNull(idDepo);
+        Assert.isTrue(idDepo>0);
+        int sum=0;
+        try {
+            sum=wagonDao.sumOfSeatsByDepo(idDepo);
+        }
+        catch (Exception e){
+            LOGGER.debug("sumOfSeatsByDepo have exception",e);
+            throw new IllegalArgumentException();
+        }
+        return sum;
     }
 
     @Override
     public List<Wagon> getWagonByDate(LocalDate from, LocalDate to) throws DataAccessException {
-        return null;
+        LOGGER.debug("getWagonByDate",from,to);
+        Assert.notNull(from);
+        Assert.notNull(to);
+        Assert.isTrue(from.isBefore(to));
+        List<Wagon> wagons;
+        try {
+            wagons=wagonDao.getWagonByDate(from,to);
+            Assert.notEmpty(wagons);
+        }
+        catch (Exception e){
+            LOGGER.debug("gerWagonByDate have exception",e);
+            throw new IllegalArgumentException();
+            }
+        return wagons;
     }
 }

@@ -29,10 +29,12 @@ public class WagonServiceImplTest {
 
     private static final Logger LOGGER= LogManager.getLogger();
 
-    @Autowired
+     @Autowired
     private WagonService wagonService;
 
     private static final Wagon wagonTest=new Wagon(16245,"closed type",2,38, LocalDate.parse("2001-09-21"));
+    private static  final LocalDate from=LocalDate.parse("2015-08-01");
+    private static final LocalDate to=LocalDate.parse("2016-08-10");
 
 
 
@@ -70,27 +72,35 @@ public class WagonServiceImplTest {
         wagon.setDepoId(1);
         int line=wagonService.updateWagon(wagon);
         Assert.assertEquals(1,line);
-
-
     }
 
     @Test
     public void deleteWagon() throws Exception {
-
+        LOGGER.debug("test:deleteWagon");
+        int line=wagonService.deleteWagon(23245);
+        Assert.assertEquals(1,line);
     }
 
     @Test
     public void countWagonByDepo() throws Exception {
-
+        LOGGER.debug("test:countWagonByDepo");
+        int countDepoBy2=wagonService.countWagonByDepo(2);
+        Assert.assertEquals(2,countDepoBy2);
     }
 
     @Test
     public void sumOfSeatsByDepo() throws Exception {
-
+        LOGGER.debug("test:sumOfSeatsByDepo");
+        int sum= wagonService.sumOfSeatsByDepo(2);
+        Assert.assertEquals(104,sum);
     }
+
 
     @Test
     public void getWagonByDate() throws Exception {
+        LOGGER.debug("test:getWagonByDate");
+        List<Wagon> wagons=wagonService.getWagonByDate(from,to);
+        Assert.assertEquals(2,wagons.size());
 
     }
 

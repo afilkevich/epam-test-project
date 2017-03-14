@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"classpath:spring-depo-service-test.xml"})
 @Transactional
 public class DepoServiceImplTest {
-
+   
     private static final Logger LOGGER= LogManager.getLogger();
 
     @Autowired
@@ -37,5 +37,24 @@ public class DepoServiceImplTest {
 
     }
 
+    @Test
+    public void getDepoById() throws Exception {
+
+    }
+
+    @Test
+    public void addDepo() throws Exception {
+
+    }
+
+    @Test
+    public void updateDepo() throws Exception {
+
+    }
+
+    @Test
+    public void deleteDepo() throws Exception {
+
+    }
 
 }

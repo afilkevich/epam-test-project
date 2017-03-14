@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -37,21 +38,70 @@ public class DepoServiceImpl implements DepoService {
 
     @Override
     public Depo getDepoById(Integer id) throws DataAccessException {
-        return null;
+        LOGGER.debug("getDepoById",id);
+        Assert.notNull(id,"id nust not be null");
+        Depo depo=null;
+        try {
+            depo=depoDao.getDepoById(id);
+            Assert.notNull(depo);
+            Assert.hasText(depo.getName(),"depo must have name");
+        }
+        catch (Exception e){
+            LOGGER.debug("getDepoById have error",e);
+            throw new IllegalArgumentException();
+
+        }
+        return depo;
     }
 
     @Override
     public Integer addDepo(Depo depo) throws DataAccessException {
-        return null;
+        LOGGER.debug("addDepo",depo);
+        Assert.hasText(depo.getName(),"must have name");
+        Integer id;
+        try {
+            id = depoDao.addDepo(depo);
+        }
+        catch (Exception e){
+            LOGGER.debug("addDepo have exception",e);
+            throw new IllegalArgumentException();
+        }
+        Assert.notNull(id);
+        return id;
     }
 
     @Override
     public int updateDepo(Depo depo) throws DataAccessException {
-        return 0;
+        LOGGER.debug("updateDepo",depo);
+        Assert.notNull(depo,"depo must be not null");
+        Assert.hasText(depo.getName(),"depo must have name");
+        Assert.notNull(depo.getId(),"if update depo must have id");
+
+        try {
+            Depo depoTest=depoDao.getDepoById(depo.getId());
+            Assert.notNull(depoTest,"if update, than depo must exists");
+
+        }
+        catch (Exception e){
+            LOGGER.debug("have exception",e);
+            throw new IllegalArgumentException();
+
+        }
+        return depoDao.updateDepo(depo);
     }
 
     @Override
     public int deleteDepo(Integer id) throws DataAccessException {
-        return 0;
+        Assert.notNull(id);
+        Depo depo;
+        try {
+            depo=depoDao.getDepoById(id);
+            Assert.notNull(depo,"not delete, if haven't depo with this id");
+        }
+        catch (Exception e){
+            LOGGER.debug("have exeption",e);
+            throw new IllegalArgumentException();
+        }
+        return depoDao.deleteDepo(id);
     }
 }

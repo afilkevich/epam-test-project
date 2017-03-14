@@ -23,8 +23,9 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"classpath:spring-depo-service-test.xml"})
 @Transactional
 public class DepoServiceImplTest {
-   
+
     private static final Logger LOGGER= LogManager.getLogger();
+    private static final Depo testDepo=new Depo("Mogilev wagon depo");
 
     @Autowired
     DepoService depoService;
@@ -39,21 +40,42 @@ public class DepoServiceImplTest {
 
     @Test
     public void getDepoById() throws Exception {
+        LOGGER.debug("test:getDepoById");
+        Depo depo=depoService.getDepoById(2);
+        Assert.assertNotNull(depo);
+        Assert.assertEquals((Integer) 2,depo.getId());
 
     }
 
     @Test
     public void addDepo() throws Exception {
+        LOGGER.debug("test:addDepo");
+        Integer id=depoService.addDepo(testDepo);
+        Assert.assertNotNull(id);
+        List<Depo> depos=depoService.getAllDepo();
+        Assert.assertEquals(3,depos.size());
 
     }
 
     @Test
     public void updateDepo() throws Exception {
+        LOGGER.debug("test:updateDepo");
+        Depo depo=depoService.getDepoById(1);
+        depo.setName("Gomel wagon park");
+        int line=depoService.updateDepo(depo);
+        Assert.assertEquals(line,1);
 
     }
 
     @Test
     public void deleteDepo() throws Exception {
+        LOGGER.debug("test:deleteDepo");
+        List<Depo> depos=depoService.getAllDepo();
+        int oldSize=depos.size();
+       int line= depoService.deleteDepo(1);
+        Assert.assertEquals(1,line);
+        depos=depoService.getAllDepo();
+        Assert.assertEquals(oldSize-1,depos.size());
 
     }
 

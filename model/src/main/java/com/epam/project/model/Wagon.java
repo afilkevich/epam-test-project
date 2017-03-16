@@ -1,6 +1,7 @@
 package com.epam.project.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
@@ -57,12 +58,13 @@ public class Wagon {
         this.countOfSeat = countOfSeat;
     }
 
-    public LocalDate getDateOfBuilder() {
-        return dateOfBuilder;
+
+    public String getDateOfBuilder() {
+        return dateOfBuilder.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
-    public void setDateOfBuilder(LocalDate dateOfBuilder) {
-        this.dateOfBuilder = dateOfBuilder;
+    public void setDateOfBuilder(String dateOfBuilder) {
+        this.dateOfBuilder = LocalDate.parse(dateOfBuilder);
     }
 
     @Override

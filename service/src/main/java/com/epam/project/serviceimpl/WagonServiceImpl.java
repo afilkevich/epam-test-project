@@ -62,7 +62,7 @@ public class WagonServiceImpl implements WagonService {
         Wagon wagon;
         try {
             wagon=wagonDao.getWagonById(id);
-            Assert.notNull(wagon);
+
         }
         catch (Exception e){
             LOGGER.debug("getWagonById have Exception",e);
@@ -80,7 +80,7 @@ public class WagonServiceImpl implements WagonService {
         Assert.notNull(wagon.getDateOfBuilder(),"wagon must have date of build");
         try {
             Wagon testWagon=wagonDao.getWagonById(wagon.getId());
-            Assert.notNull(testWagon,"if update , than wagon must existed in db");
+
         }
         catch (Exception e){
             LOGGER.debug("updateWagon have exception",wagon);
@@ -97,7 +97,7 @@ public class WagonServiceImpl implements WagonService {
         Wagon wagon;
         try {
             wagon=wagonDao.getWagonById(id);
-            Assert.notNull(wagon);
+
         }
         catch (Exception e)
         {

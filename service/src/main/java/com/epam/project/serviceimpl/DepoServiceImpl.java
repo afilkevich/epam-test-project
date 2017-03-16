@@ -43,7 +43,6 @@ public class DepoServiceImpl implements DepoService {
         Depo depo=null;
         try {
             depo=depoDao.getDepoById(id);
-            Assert.notNull(depo);
             Assert.hasText(depo.getName(),"depo must have name");
         }
         catch (Exception e){
@@ -79,7 +78,6 @@ public class DepoServiceImpl implements DepoService {
 
         try {
             Depo depoTest=depoDao.getDepoById(depo.getId());
-            Assert.notNull(depoTest,"if update, than depo must exists");
 
         }
         catch (Exception e){
@@ -96,7 +94,7 @@ public class DepoServiceImpl implements DepoService {
         Depo depo;
         try {
             depo=depoDao.getDepoById(id);
-            Assert.notNull(depo,"not delete, if haven't depo with this id");
+
         }
         catch (Exception e){
             LOGGER.debug("have exeption",e);

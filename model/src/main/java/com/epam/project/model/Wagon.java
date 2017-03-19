@@ -1,8 +1,10 @@
 package com.epam.project.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 import java.util.Objects;
 
 /**
@@ -13,6 +15,8 @@ public class Wagon {
    private String type;
    private int depoId;
    private int countOfSeat;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
    private LocalDate dateOfBuilder;
 
     public Wagon(Integer id, String type, int depoId, int countOfSeat, LocalDate dateOfBuilder) {

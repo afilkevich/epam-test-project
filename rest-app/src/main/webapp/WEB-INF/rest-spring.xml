@@ -23,7 +23,7 @@
                 <value>classpath:depo.properties</value>
                 <value>classpath:wagon.properties</value>
                 <value>classpath:database.properties</value>
-                <value>classpath:application.properties</value>
+
             </list>
         </property>
     </bean>

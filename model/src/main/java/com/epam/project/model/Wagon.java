@@ -63,12 +63,12 @@ public class Wagon {
     }
 
 
-    public String getDateOfBuilder() {
-        return dateOfBuilder.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    public LocalDate getDateOfBuilder() {
+        return dateOfBuilder;
     }
 
-    public void setDateOfBuilder(String dateOfBuilder) {
-        this.dateOfBuilder = LocalDate.parse(dateOfBuilder);
+    public void setDateOfBuilder(LocalDate dateOfBuilder) {
+        this.dateOfBuilder = dateOfBuilder;
     }
 
     @Override

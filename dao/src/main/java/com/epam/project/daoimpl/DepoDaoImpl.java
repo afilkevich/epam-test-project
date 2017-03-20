@@ -22,7 +22,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Created by master on 9.3.17.
+ * Created by alexander
+ * Dao-depo implementation
  */
 public class DepoDaoImpl implements DepoDao {
 

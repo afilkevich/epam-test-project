@@ -28,6 +28,15 @@ public class WagonRestController {
 
     @Autowired
     private WagonService wagonService;
+
+    // curl -v localhost:8088/wagon/getAllWagon
+    @ResponseBody
+    @RequestMapping(value = "/getAllWagon",method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    public List<Wagon> getAllWagon(){
+        LOGGER.debug("rest:getAllWagon");
+        return wagonService.getAllWagon();
+    }
     
 //curl -v localhost:8088/wagon/get/14176
     @ResponseBody
@@ -57,6 +66,6 @@ public class WagonRestController {
         wagonService.addWagon(wagon);
         return wagon.getId();
     }
-    
+
 
 }

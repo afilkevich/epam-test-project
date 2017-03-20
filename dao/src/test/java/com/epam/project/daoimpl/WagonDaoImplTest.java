@@ -39,6 +39,12 @@ public class WagonDaoImplTest {
         Assert.assertTrue(wagons.size()>0);
 
     }
+    @Test
+    public void getAllWagon() throws Exception{
+        LOGGER.debug("test:getAllWagon");
+        List<Wagon> wagons=wagonDao.getAllWagon();
+        Assert.assertTrue(wagons.size()>0);
+    }
 
 
     @Test

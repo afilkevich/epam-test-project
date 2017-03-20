@@ -38,6 +38,12 @@ public class WagonServiceImpl implements WagonService {
     }
 
     @Override
+    public List<Wagon> getAllWagon() throws DataAccessException {
+        LOGGER.debug("getAllWagon");
+        return wagonDao.getAllWagon();
+    }
+
+    @Override
     public void addWagon(Wagon wagon) throws DataAccessException {
         LOGGER.debug("addWagon", wagon);
         Assert.notNull(wagon,"wagon musn't be null");

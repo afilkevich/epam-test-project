@@ -48,6 +48,13 @@ public class WagonServiceImplTest {
     }
 
     @Test
+    public  void getAllWagon()throws Exception{
+        LOGGER.debug("test:getAllWagon");
+        List<Wagon> wagons=wagonService.getAllWagon();
+        Assert.assertEquals(4,wagons.size());
+    }
+
+    @Test
     public void addWagon() throws Exception {
         LOGGER.debug("test:addWagon");
         List<Wagon> wagons=wagonService.getAllWagonByDepo(2);

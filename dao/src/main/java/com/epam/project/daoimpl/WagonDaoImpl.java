@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -50,6 +51,8 @@ public class WagonDaoImpl implements WagonDao {
     String sumSeatsSql;
     @Value("${wagon.selectbydate}")
     String selectByDateSql;
+    @Value("${wagon.selectall}")
+    String selectAllWagon;
 
     public WagonDaoImpl(DataSource dataSource) {
         jdbcTemplate =  new JdbcTemplate(dataSource);
@@ -61,6 +64,12 @@ public class WagonDaoImpl implements WagonDao {
         LOGGER.debug("getAllWagonByDepo",id);
         SqlParameterSource sqlParameterSource=new MapSqlParameterSource("d_id",id);
         return namedParameterJdbcTemplate.query(getAllWagonByDepoSql,sqlParameterSource,new WagonRowMapper());
+    }
+
+    @Override
+    public List<Wagon> getAllWagon() throws DataAccessException {
+        LOGGER.debug("getAllWagon");
+        return jdbcTemplate.query( selectAllWagon,new WagonRowMapper());
     }
 
     @Override

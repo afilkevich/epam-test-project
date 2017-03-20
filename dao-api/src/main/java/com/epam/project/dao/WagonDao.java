@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface WagonDao {
     List<Wagon> getAllWagonByDepo(Integer idDepo) throws DataAccessException;
+    List<Wagon> getAllWagon() throws DataAccessException;
     void addWagon(Wagon wagon) throws DataAccessException;
     Wagon getWagonById(Integer id) throws DataAccessException;
     int updateWagon(Wagon wagon) throws DataAccessException;

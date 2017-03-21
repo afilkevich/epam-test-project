@@ -55,12 +55,21 @@ public class DepoDaoImpl implements DepoDao {
         namedParameterJdbcTemplate=new NamedParameterJdbcTemplate(dataSource);
     }
 
+    /**
+     * In case when we can have more then one entity of Depo we use this function.
+     * @return List of Depo  from ResultSet of SQL query.
+     */
     @Override
     public List<Depo> getAllDepo() throws DataAccessException {
         LOGGER.debug("getallDepo");
         return jdbcTemplate.query(getAllDepoSql,new DepoRowMapper());
     }
 
+    /**
+     * Returns the depo with the specified Id from database.
+     * @param id id of the depo to return
+     * @return the depo with the specified Id from the database
+     */
     @Override
     public Depo getDepoById(Integer id) throws DataAccessException {
         LOGGER.debug("getDepoById",id);
@@ -69,6 +78,11 @@ public class DepoDaoImpl implements DepoDao {
         return depo;
     }
 
+    /**
+     * Insert specified depo to the database
+     * @param depo depo to be inserted to the database
+     * @return id of depo in database
+     */
     @Override
     public Integer addDepo(Depo depo) throws DataAccessException {
         LOGGER.debug("addDepo",depo);
@@ -80,6 +94,10 @@ public class DepoDaoImpl implements DepoDao {
         return keyHolder.getKey().intValue();
     }
 
+    /**
+     * Replaces the depo in the database with the specified depo.
+     * @param depo to be updated in the database
+     */
     @Override
     public int updateDepo(Depo depo) throws DataAccessException {
         LOGGER.debug("updateDepo",depo);
@@ -89,6 +107,10 @@ public class DepoDaoImpl implements DepoDao {
         return namedParameterJdbcTemplate.update(updateDepo,mapSqlParameterSource);
     }
 
+    /**
+     * Delete depo from database
+     * @param id of depo
+     */
     @Override
     public int deleteDepo(Integer id) throws DataAccessException {
         LOGGER.debug("deletedepo",id);
@@ -97,7 +119,10 @@ public class DepoDaoImpl implements DepoDao {
         return namedParameterJdbcTemplate.update(deleteDepo,sqlParameterSource);
     }
 
-
+    /**
+     * Mapper for NamedParameterJdbcTemplate for  tables of Depo.
+     * In case when we can have only one entity of Depo we return depo from @depo field.
+         */
     private class DepoRowMapper implements RowMapper<Depo> {
         @Override
         public Depo mapRow(ResultSet resultSet, int i) throws SQLException {

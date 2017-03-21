@@ -67,5 +67,42 @@ public class WagonRestController {
         return wagon.getId();
     }
 
+    // curl -H "Content-Type: application/json" -X PUT -d '{"id":"14176","type":"closed type","depoId":"1","countOfSeat":"38","dateOfBuilder":"2009-10-24"}' -v localhost:8088/wagon/update
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public Integer updateWagon(@RequestBody Wagon wagon){
+        LOGGER.debug("rest:updateWagon");
+        return wagonService.updateWagon(wagon);
+    }
+
+    //curl -X DELETE -v localhost:8088/wagon/delete/14176
+    @ResponseBody
+    @RequestMapping(value = "/delete/{idWagon}", method = RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Integer deleteWagon(@PathVariable(value = "idWagon") Integer idWagon){
+        LOGGER.debug("rest:deleteWagon");
+        return wagonService.deleteWagon(idWagon);
+    }
+
+    //curl -v localhost:8088/wagon/countOfWagon/1
+    @ResponseBody
+    @RequestMapping(value = "/countOfWagon/{idDepo}",method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Integer countOfWagonByDepo(@PathVariable(value = "idDepo") Integer idDepo){
+        LOGGER.debug("rest:countOfWagonByDepo");
+        return wagonService.countWagonByDepo(idDepo);
+    }
+
+    //curl -v localhost:8088/wagon/sumOfSeatsByDepo/2
+    @ResponseBody
+    @RequestMapping(value = "/sumOfSeatsByDepo/{idDepo}",method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public Integer sumOfSeatsByDepo(@PathVariable(value = "idDepo") Integer idDepo){
+        LOGGER.debug("rest:sumOfSeatsByDepo");
+        return wagonService.sumOfSeatsByDepo(idDepo);
+    }
+
+
 
 }

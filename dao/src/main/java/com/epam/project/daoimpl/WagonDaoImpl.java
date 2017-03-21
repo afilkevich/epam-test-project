@@ -20,7 +20,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Created by master on 11.3.17.
+ * Created by alexander
+ * Dao-wagon implementation
  */
 public class WagonDaoImpl implements WagonDao {
 
@@ -59,6 +60,11 @@ public class WagonDaoImpl implements WagonDao {
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
+    /**
+     * Returns the list of wagon with the specified IdDepo from database.
+     * @param id id of the depo which wagons return
+     * @return the List of Wagon from ResultSet
+     */
     @Override
     public List<Wagon> getAllWagonByDepo(Integer id) throws DataAccessException {
         LOGGER.debug("getAllWagonByDepo",id);
@@ -66,12 +72,20 @@ public class WagonDaoImpl implements WagonDao {
         return namedParameterJdbcTemplate.query(getAllWagonByDepoSql,sqlParameterSource,new WagonRowMapper());
     }
 
+    /**
+     * In case when we can have all entity of Wagon we use this function.
+     * @return List of Wagon  from ResultSet of SQL query.
+     */
     @Override
     public List<Wagon> getAllWagon() throws DataAccessException {
         LOGGER.debug("getAllWagon");
         return jdbcTemplate.query( selectAllWagon,new WagonRowMapper());
     }
 
+    /**
+     * Insert specified wagon to the database
+     * @param wagon wagon to be inserted to the database
+     */
     @Override
     public void addWagon(Wagon wagon) throws DataAccessException {
         LOGGER.debug("addWagon",wagon);
@@ -85,6 +99,11 @@ public class WagonDaoImpl implements WagonDao {
         namedParameterJdbcTemplate.update(addWagonSql,sqlParameterSource);
     }
 
+    /**
+     * Returns the wagon with the specified Id from database.
+     * @param id id of the wagon to return
+     * @return the wagon with the specified Id from the database
+     */
     @Override
     public Wagon getWagonById(Integer id) throws DataAccessException {
         LOGGER.debug("getwagonById",id);
@@ -93,6 +112,10 @@ public class WagonDaoImpl implements WagonDao {
        return wagon;
     }
 
+    /**
+     * Replaces the wagon in the database with the specified wagon.
+     * @param wagon to be updated in the database
+     */
     @Override
     public int updateWagon(Wagon wagon) throws DataAccessException {
         LOGGER.debug("updateWagon",wagon);
@@ -105,6 +128,10 @@ public class WagonDaoImpl implements WagonDao {
         return namedParameterJdbcTemplate.update(updateWagonSql,mapSqlParameterSource);
     }
 
+    /**
+     * Delete wagon from database
+     * @param id of wagon
+     */
     @Override
     public int deleteWagon(Integer id) throws DataAccessException {
         LOGGER.debug("deleteWagon",id);
@@ -112,6 +139,11 @@ public class WagonDaoImpl implements WagonDao {
         return namedParameterJdbcTemplate.update(deleteWagonSql,sqlParameterSource);
     }
 
+    /**
+     * Returns the count of wagon in depo with the specified Id from database.
+     * @param idDepo id of the depo to return
+     * @return the count of wagon in depo with the specified Id from database
+     */
     @Override
     public Integer countWagonByDepo(Integer idDepo) throws DataAccessException {
         LOGGER.debug("countWagonByDepo",idDepo);
@@ -119,6 +151,11 @@ public class WagonDaoImpl implements WagonDao {
         return namedParameterJdbcTemplate.queryForObject(countWagonSql,sqlParameterSource,Integer.class);
     }
 
+    /**
+     * Returns the summ of seats of wagons in depo with the specified Id from database.
+     * @param idDepo id of the depo to return
+     * @return Returns the summ of seats of wagons in depo with the specified Id from database.
+     */
     @Override
     public Integer sumOfSeatsByDepo(Integer idDepo) throws DataAccessException {
         LOGGER.debug("sumOfSeatsByDepo",idDepo);
@@ -126,6 +163,12 @@ public class WagonDaoImpl implements WagonDao {
         return namedParameterJdbcTemplate.queryForObject(sumSeatsSql,sqlParameterSource,Integer.class);
     }
 
+    /**
+     * In case when we can have all entity of Wagon which build in duration .
+     * @param from localdate which begin build
+     * @param to localdate which finish build
+     * @return List of Wagon  from ResultSet of SQL query.
+     */
     @Override
     public List<Wagon> getWagonByDate(LocalDate from, LocalDate to) throws DataAccessException {
         LOGGER.debug("getWagonByDate",from,to);
@@ -135,8 +178,11 @@ public class WagonDaoImpl implements WagonDao {
         return namedParameterJdbcTemplate.query(selectByDateSql,sqlParameterSource,new WagonRowMapper());
     }
 
+    /**
+     * Mapper for NamedParameterJdbcTemplate for  tables of Wagon.
+     * In case when we can have only one entity of Wagon we return wagon from @wagon field.
+     */
     private class WagonRowMapper implements RowMapper<Wagon> {
-
         @Override
         public Wagon mapRow(ResultSet resultSet, int i) throws SQLException {
             Wagon wagon=new Wagon(

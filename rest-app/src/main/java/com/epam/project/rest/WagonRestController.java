@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -102,6 +103,18 @@ public class WagonRestController {
         LOGGER.debug("rest:sumOfSeatsByDepo");
         return wagonService.sumOfSeatsByDepo(idDepo);
     }
+    //curl -v localhost:8088/wagon/getByDate/2015-08-01/2016-09-01
+    @RequestMapping(value = "/getByDate/{from}/{to}",method = RequestMethod.GET)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.FOUND)
+    public List<Wagon> getByDate(@PathVariable(value = "from")String from,
+                                 @PathVariable(value = "to") String to){
+        LOGGER.debug("rest:getByDate");
+        List<Wagon> wagons=wagonService.getWagonByDate(LocalDate.parse(from),LocalDate.parse(to));
+        return wagons;
+    }
+
+
 
 
 

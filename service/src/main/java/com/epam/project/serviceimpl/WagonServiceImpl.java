@@ -30,6 +30,11 @@ public class WagonServiceImpl implements WagonService {
         this.wagonDao = wagonDao;
     }
 
+    /**
+     * Returns the list of wagon with the specified IdDepo from database.
+     * @param idDepo id of the depo which wagons return
+     * @return the List of Wagon from database
+     */
     @Override
     public List<Wagon> getAllWagonByDepo(Integer idDepo) throws DataAccessException {
         LOGGER.debug("getAllWagonByDepo",idDepo);
@@ -37,12 +42,20 @@ public class WagonServiceImpl implements WagonService {
         return wagonDao.getAllWagonByDepo(idDepo);
     }
 
+    /**
+     * In case when we can have all  Wagon we use this function.
+     * @return List of Wagon  from database.
+     */
     @Override
     public List<Wagon> getAllWagon() throws DataAccessException {
         LOGGER.debug("getAllWagon");
         return wagonDao.getAllWagon();
     }
 
+    /**
+     * Insert specified wagon to the database
+     * @param wagon wagon to be inserted to the database
+     */
     @Override
     public void addWagon(Wagon wagon) throws DataAccessException {
         LOGGER.debug("addWagon", wagon);
@@ -57,9 +70,12 @@ public class WagonServiceImpl implements WagonService {
             LOGGER.debug("addWagon have exception",e);
             throw new IllegalArgumentException();
         }
-
     }
-
+    /**
+     * Returns the wagon with the specified Id from database.
+     * @param id id of the wagon to return
+     * @return the wagon with the specified Id from the database
+     */
     @Override
     public Wagon getWagonById(Integer id) throws DataAccessException {
         LOGGER.debug("getwagonById",id);
@@ -68,7 +84,6 @@ public class WagonServiceImpl implements WagonService {
         Wagon wagon;
         try {
             wagon=wagonDao.getWagonById(id);
-
         }
         catch (Exception e){
             LOGGER.debug("getWagonById have Exception",e);
@@ -77,6 +92,10 @@ public class WagonServiceImpl implements WagonService {
         return wagon;
     }
 
+    /**
+     * Replaces the wagon in the database with the specified wagon.
+     * @param wagon to be updated in the database
+     */
     @Override
     public int updateWagon(Wagon wagon) throws DataAccessException {
         LOGGER.debug("updateWagon",wagon);
@@ -86,7 +105,6 @@ public class WagonServiceImpl implements WagonService {
         Assert.notNull(wagon.getDateOfBuilder(),"wagon must have date of build");
         try {
             Wagon testWagon=wagonDao.getWagonById(wagon.getId());
-
         }
         catch (Exception e){
             LOGGER.debug("updateWagon have exception",wagon);
@@ -95,25 +113,30 @@ public class WagonServiceImpl implements WagonService {
         return wagonDao.updateWagon(wagon);
     }
 
+    /**
+     * Delete wagon from database
+     * @param id of wagon
+     */
     @Override
     public int deleteWagon(Integer id) throws DataAccessException {
         LOGGER.debug("deleteWagon",id);
         Assert.notNull(id);
         Assert.isTrue(id>0);
-        Wagon wagon;
         try {
-            wagon=wagonDao.getWagonById(id);
-
+         Wagon  wagon=wagonDao.getWagonById(id);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             LOGGER.debug("deleteWAgon have exception",e);
             throw new IllegalArgumentException();
         }
-
         return wagonDao.deleteWagon(id);
     }
 
+    /**
+     * Returns the count of wagon in depo with the specified Id from database.
+     * @param idDepo id of the depo to return
+     * @return the count of wagon in depo with the specified Id from database
+     */
     @Override
     public Integer countWagonByDepo(Integer idDepo) throws DataAccessException {
         LOGGER.debug("countWagonByDepo",idDepo);
@@ -130,6 +153,11 @@ public class WagonServiceImpl implements WagonService {
         return count;
     }
 
+     /**
+     * Returns the sum of seats of wagons in depo with the specified Id from database.
+     * @param idDepo id of the depo to return
+     * @return Returns the summ of seats of wagons in depo with the specified Id from database.
+     */
     @Override
     public Integer sumOfSeatsByDepo(Integer idDepo) throws DataAccessException {
         LOGGER.debug("sumOfSeatsByDepo",idDepo);
@@ -146,6 +174,12 @@ public class WagonServiceImpl implements WagonService {
         return sum;
     }
 
+    /**
+     * In case when we can have all entity of Wagon which build in duration .
+     * @param from localdate which begin build
+     * @param to localdate which finish build
+     * @return List of Wagon  from database.
+     */
     @Override
     public List<Wagon> getWagonByDate(LocalDate from, LocalDate to) throws DataAccessException {
         LOGGER.debug("getWagonByDate",from,to);

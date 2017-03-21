@@ -103,6 +103,7 @@ public class WagonRestController {
         LOGGER.debug("rest:sumOfSeatsByDepo");
         return wagonService.sumOfSeatsByDepo(idDepo);
     }
+
     //curl -v localhost:8088/wagon/getByDate/2015-08-01/2016-09-01
     @RequestMapping(value = "/getByDate/{from}/{to}",method = RequestMethod.GET)
     @ResponseBody

@@ -73,7 +73,7 @@ public class WagonDaoImpl implements WagonDao {
     }
 
     /**
-     * In case when we can have all entity of Wagon we use this function.
+     * In case when we can have all  Wagon we use this function.
      * @return List of Wagon  from ResultSet of SQL query.
      */
     @Override
@@ -152,7 +152,7 @@ public class WagonDaoImpl implements WagonDao {
     }
 
     /**
-     * Returns the summ of seats of wagons in depo with the specified Id from database.
+     * Returns the sum of seats of wagons in depo with the specified Id from database.
      * @param idDepo id of the depo to return
      * @return Returns the summ of seats of wagons in depo with the specified Id from database.
      */

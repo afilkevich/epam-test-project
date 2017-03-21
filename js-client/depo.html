@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Depo</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<h1>DEPO</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th> Name</th>
+        </tr>
+        </thead>
+        <tbody id="depoList">
+        </tbody>
+    </table>
+</div>
+
+<hr />
+
+<form id="DepoForm">
+    <div class="mainArea">
+
+        <label>Depo id:</label>
+        <input id="depoId" name="id" type="text" disabled/>
+
+        <label>Name:</label>
+        <input id="name" name="name" type="text" required/>
+
+
+
+        <button id="btnDepoSave">Save</button>
+        <button id="btnDepoClean">Clear</button>
+
+    </div>
+</form>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/main.js"></script>-->
+<script src="js/depo.js"></script>
+</body>
+</html>

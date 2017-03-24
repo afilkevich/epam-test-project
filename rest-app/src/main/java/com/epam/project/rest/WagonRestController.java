@@ -33,8 +33,7 @@ public class WagonRestController {
     // curl -v localhost:8088/wagon/getAllWagon
     @ResponseBody
     @RequestMapping(value = "/getAllWagon",method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.FOUND)
-    public List<Wagon> getAllWagon(){
+       public List<Wagon> getAllWagon(){
         LOGGER.debug("rest:getAllWagon");
         return wagonService.getAllWagon();
     }

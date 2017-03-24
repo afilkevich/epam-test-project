@@ -31,7 +31,6 @@ public class DepoRestController {
     // curl -v localhost:8088/depo/getAll
     @ResponseBody
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.FOUND)
     public List<Depo> getAllDepo(){
         LOGGER.debug("rest:getAllDepo");
         List<Depo> depos=depoService.getAllDepo();
@@ -41,7 +40,6 @@ public class DepoRestController {
     //curl -v localhost:8088/depo/getById/2
     @ResponseBody
     @RequestMapping(value = "/getById/{id}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.FOUND)
     public  Depo getById(@PathVariable(value = "id") Integer id){
         LOGGER.debug("rest:getById",id);
         return depoService.getDepoById(id);
@@ -73,8 +71,5 @@ public class DepoRestController {
     LOGGER.debug("rest:deleteDepo",idDepo);
     return depoService.deleteDepo(idDepo);
 }
-
-
-
 
 }

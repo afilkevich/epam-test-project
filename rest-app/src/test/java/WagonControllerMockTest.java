@@ -24,8 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.easymock.EasyMock.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -120,8 +119,37 @@ public class WagonControllerMockTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().string("0"));
+    }
 
+    @Test
+    public void updateWagonTest() throws Exception{
+        LOGGER.debug("test:rest:updateWagon");
+        expect(wagonService.updateWagon(anyObject(Wagon.class))).andReturn(0);
+        replay(wagonService);
+
+        String wagon=new ObjectMapper().writeValueAsString(new Wagon());
+        mockMvc.perform(
+                put("/wagon/update")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(wagon))
+                .andDo(print())
+                .andExpect(status().isAccepted())
+                .andExpect(content().string("0"));
+    }
+    
+    @Test
+    public void deleteWagonTest() throws Exception{
+        LOGGER.debug("test:rest:deleteWagon");
+        expect(wagonService.deleteWagon(anyObject(Integer.class))).andReturn(0);
+        replay(wagonService);
+         mockMvc.perform(
+                 delete("/wagon/delete/1")
+                 .accept(MediaType.APPLICATION_JSON))
+                 .andDo(print())
+                 .andExpect(status().isOk());
 
     }
+
 
 }

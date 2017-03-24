@@ -57,7 +57,7 @@ public class WagonServiceImpl implements WagonService {
      * @param wagon wagon to be inserted to the database
      */
     @Override
-    public void addWagon(Wagon wagon) throws DataAccessException {
+    public Integer addWagon(Wagon wagon) throws DataAccessException {
         LOGGER.debug("addWagon", wagon);
         Assert.notNull(wagon,"wagon musn't be null");
         Assert.notNull(wagon.getId(),"wagon must be have id");
@@ -70,6 +70,7 @@ public class WagonServiceImpl implements WagonService {
             LOGGER.debug("addWagon have exception",e);
             throw new IllegalArgumentException();
         }
+        return wagon.getId();
     }
     /**
      * Returns the wagon with the specified Id from database.

@@ -13,7 +13,7 @@ import java.util.List;
 public interface WagonService {
     List<Wagon> getAllWagonByDepo(Integer idDepo) throws DataAccessException;
     List<Wagon> getAllWagon() throws DataAccessException;
-    void addWagon(Wagon wagon) throws DataAccessException;
+    Integer addWagon(Wagon wagon) throws DataAccessException;
     Wagon getWagonById(Integer id) throws DataAccessException;
     int updateWagon(Wagon wagon) throws DataAccessException;
     int deleteWagon(Integer id) throws DataAccessException;

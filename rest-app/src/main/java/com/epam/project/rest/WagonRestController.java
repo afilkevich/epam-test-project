@@ -49,8 +49,7 @@ public class WagonRestController {
     // curl -v localhost:8088/wagon/getByDepo/1
     @ResponseBody
     @RequestMapping(value = "/getByDepo/{idDepo}",method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.FOUND)
-    public List<Wagon> getWagonByDepo(@PathVariable(value = "idDepo") Integer idDepo){
+        public List<Wagon> getWagonByDepo(@PathVariable(value = "idDepo") Integer idDepo){
         LOGGER.debug("rest:getWagonByDepo");
         List<Wagon>wagons= wagonService.getAllWagonByDepo(idDepo);
         return wagons;
@@ -63,8 +62,8 @@ public class WagonRestController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public Integer addWagon(@RequestBody Wagon wagon){
         LOGGER.debug("rest:addWagon");
-        wagonService.addWagon(wagon);
-        return wagon.getId();
+        return wagonService.addWagon(wagon);
+
     }
 
     // curl -H "Content-Type: application/json" -X PUT -d '{"id":"14176","type":"closed type","depoId":"1","countOfSeat":"38","dateOfBuilder":"2009-10-24"}' -v localhost:8088/wagon/update

@@ -22,9 +22,7 @@ import java.util.Arrays;
 
 import static org.easymock.EasyMock.*;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -107,6 +105,7 @@ public class DepoControllerMockTest {
 
     @Test
     public void updateDepoTest() throws Exception{
+        LOGGER.debug("test:rest:updateDepo");
         expect(depoService.updateDepo(anyObject(Depo.class))).andReturn(0);
         replay(depoService);
         String depo=new ObjectMapper().writeValueAsString(new Depo(3,"gh"));
@@ -123,7 +122,16 @@ public class DepoControllerMockTest {
 
     @Test
     public void deleteDepoTest() throws Exception{
-        
+        LOGGER.debug("test:rest:deleteDepo");
+        expect(depoService.deleteDepo(anyObject(Integer.class))).andReturn(0);
+        replay(depoService);
+        mockMvc.perform(
+                delete("/depo/delete/2")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+
     }
 
 

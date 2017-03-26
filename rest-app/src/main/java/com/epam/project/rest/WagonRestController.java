@@ -105,7 +105,7 @@ public class WagonRestController {
     //curl -v localhost:8088/wagon/getByDate/2015-08-01/2016-09-01
     @RequestMapping(value = "/getByDate/{from}/{to}",method = RequestMethod.GET)
     @ResponseBody
-    @ResponseStatus(value = HttpStatus.FOUND)
+    @ResponseStatus(value = HttpStatus.OK)
     public List<Wagon> getByDate(@PathVariable(value = "from")String from,
                                  @PathVariable(value = "to") String to){
         LOGGER.debug("rest:getByDate");

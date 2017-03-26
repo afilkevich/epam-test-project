@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
+
 
 import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -137,7 +137,7 @@ public class WagonControllerMockTest {
                 .andExpect(status().isAccepted())
                 .andExpect(content().string("0"));
     }
-    
+
     @Test
     public void deleteWagonTest() throws Exception{
         LOGGER.debug("test:rest:deleteWagon");
@@ -151,5 +151,44 @@ public class WagonControllerMockTest {
 
     }
 
+    @Test
+    public void countOfByDepoTest() throws Exception{
+        LOGGER.debug("test:rest:countOfByDepo");
+        expect(wagonService.countWagonByDepo(anyInt())).andReturn(2);
+        replay(wagonService);
+
+        mockMvc.perform(
+                get("/wagon/countOfWagon/2")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print()).andExpect(status().isOk())
+        .andExpect(content().string("2"));
+    }
+
+    @Test
+    public void sumOfSeatsByDepoTest() throws Exception{
+        LOGGER.debug("test:rest:sumOfSeatsByDepo");
+        expect(wagonService.sumOfSeatsByDepo(anyInt())).andReturn(38);
+        replay(wagonService);
+        mockMvc.perform(
+                get("/wagon/sumOfSeatsByDepo/2")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string("38"));
+
+    }
+
+    @Test
+    public void getByDate() throws Exception{
+        LOGGER.debug("test:rest:getByDate");
+        expect(wagonService.getWagonByDate(anyObject(LocalDate.class),anyObject(LocalDate.class))).andReturn(Arrays.asList(wagon));
+        replay(wagonService);
+        mockMvc.perform(
+                get("/wagon/getByDate/2009-01-08/2009-01-10")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+    }
 
 }

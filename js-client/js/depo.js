@@ -1,4 +1,5 @@
-var host="http://localhost:8088";
+var depo="http://localhost:8088/depo";
+var wagon="http://localhost:8088/wagon";
 
 $.dto=null;
 
@@ -7,7 +8,7 @@ getAllDepo();
 function getAllDepo(){
 $.ajax({
 type: 'GET',
-url: host +"/depo/getAll",
+url: depo +"/getAll",
 dataType:'json',
 success: renderList,
 error:function(jqXHR, textStatus, errorThrown){
@@ -22,17 +23,35 @@ function renderList(data) {
     $('#depoList tr').remove();
 
     $.each(dto, function (index, depo) {
-        drawRow(depo);
+        drawRow(index,depo);
     });
 }
 
-function drawRow(depo) {
+function drawRow(index,depo) {
+
     var row = $("<tr />")
     $("#depoList").append(row);
 
-    row.append($("<td>" + '<a href="#" data-id="' + depo.id + '">' + depo.name + '</a></td>'));
+   row.append($("<td>" +depo.id+'</td>'));
+   row.append($("<td>"   + depo.name + '</td>'));
+   row.append($("<td>"  +countWagon(depo.id) + '</td>'));
+    row.append($("<td>" +   3 + '</td>'));
 
 }
+
+function countWagon(id){
+
+var countWagon;
+$.ajax({
+type: 'GET',
+dataType:'json',
+url: wagon +"/countOfWagon/"+id,
+success:function(data){
+countWagon=data}
+});
+return countWagon;
+}
+
 
 function formToJSON() {
     var id = $('#Id').val();

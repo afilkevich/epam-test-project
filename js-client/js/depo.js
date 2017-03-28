@@ -3,20 +3,30 @@ var wagon="http://localhost:8088/wagon";
 
 $.dto=null;
 
+
+
+ $('#btnDepoSave').click(function(){
+  if($('#depoId').val()=='')
+  addDepo();
+  else
+  updateDepo();
+  return false;
+  });
+
 getAllDepo();
 
 function getAllDepo(){
-$.ajax({
-type: 'GET',
-url: depo +"/getAll",
-dataType:'json',
-success: renderList,
-error:function(jqXHR, textStatus, errorThrown){
-console.log(jqXHR, textStatus, errorThrown);
-alert('getAll:'+textStatus +jqXHR)
-}
-});
-}
+   $.ajax({
+   type: 'GET',
+   url: depo +"/getAll",
+    dataType:'json',
+    success: renderList,
+    error:function(jqXHR, textStatus, errorThrown){
+    console.log(jqXHR, textStatus, errorThrown);
+    alert('getAll:'+textStatus +jqXHR)
+     }
+   });
+ }
 
 function renderList(data) {
     dto = data == null ? [] : (data instanceof Array ? data : [data]);
@@ -51,6 +61,26 @@ function countWagon(id){
      return sumOfSeats;
     }
 
+    function addDepo() {
+        console.log('addDepo');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: depo + "/add",
+            dataType: 'json',
+            data: formToJSON(),
+            success: function (data, textStatus, jqXHR) {
+                alert('Depo created successfully');
+                console.log('Depo created successfully');
+                $('#depoId').val(data.id);
+                getAllDepo();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('addDepo error: ' + errorThrown);
+            }
+        });
+    }
+
 function drawRow(depo) {
     var row = $("<tr />")
     $("#depoList").append(row);
@@ -63,10 +93,11 @@ function drawRow(depo) {
 }
 
 function formToJSON() {
-    var id = $('#Id').val();
-    return JSON.stringify({
-        "Id": id == "" ? null : id,
-        "Name": $('#Name').val(),
+    var id = $('#depoId').val();
 
+    return JSON.stringify({
+        "id": id == "" ? null : id,
+        "name": $('#name').val()
     });
+
 }

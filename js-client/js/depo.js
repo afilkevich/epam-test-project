@@ -5,16 +5,16 @@ $.dto=null;
 
 $(document).on("click", "a", function() {
     var action = $(this).text();
-    var selectedDepoId = $(this).data("id");
+    var selectedId = $(this).data("id");
     if (action == "delete") {
-      deleteDepo(selectedDepoId);
+      deleteDepo(selectedId);
     }
 });
 
-$('#btnDepoClean').click(function(){
-$("#depoId").val("");
-$("#name").val("");
-});
+ $('#btnDepoClean').click(function(){
+    $("#depoId").val("");
+    $("#name").val("");
+ });
 
 
  $('#btnDepoSave').click(function(){
@@ -49,7 +49,7 @@ function renderList(data) {
     });
 }
 
-   function countWagon(id){
+function countWagon(id){
    var countWagon;
    $.ajax({
    type: 'GET',
@@ -59,9 +59,9 @@ function renderList(data) {
    countWagon=data}
    });
    return countWagon;
-    }
+ }
 
-     function sumOfSeats(id){
+function sumOfSeats(id){
      var sumOfSeats;
      $.ajax({
      type: 'GET',
@@ -71,9 +71,9 @@ function renderList(data) {
      sumOfSeats=data}
      });
      return sumOfSeats;
-     }
+  }
 
-     function deleteDepo(id){
+function deleteDepo(id){
      console.log('delete depo');
      $.ajax({
      type: 'DELETE',
@@ -85,11 +85,11 @@ function renderList(data) {
      },
      error:function (jqXHR, textStatus, errorThrown) {
            alert('delete Depo error: ' + errorThrown);
-           }
-        });
      }
+     });
+ }
 
-     function updateDepo(){
+function updateDepo(){
         console.log('updateDepo');
         $.ajax({
         type:'PUT',
@@ -104,10 +104,10 @@ function renderList(data) {
          alert('updateDepo error: '+errorThrown);
          }
         });
-     }
+  }
 
 
-    function addDepo() {
+ function addDepo() {
         console.log('addDepo');
         $.ajax({
             type: 'POST',
@@ -125,7 +125,7 @@ function renderList(data) {
                 alert('addDepo error: ' + errorThrown);
             }
         });
-    }
+  }
 
 function drawRow(depo) {
     var row = $("<tr />")
@@ -136,15 +136,12 @@ function drawRow(depo) {
    row.append($("<td>"  +countWagon(depo.id) + '</td>'));
    row.append($("<td>" + sumOfSeats(depo.id) + '</td>'));
    row.append($("<td>" + '<a href="#" data-id="' + depo.id + '">delete</a></td>'));
-
-}
+ }
 
 function formToJSON() {
     var id = $('#depoId').val();
-
     return JSON.stringify({
         "id": id == "" ? null : id,
         "name": $('#name').val()
     });
-
 }

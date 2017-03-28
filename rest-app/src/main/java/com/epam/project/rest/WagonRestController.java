@@ -93,9 +93,9 @@ public class WagonRestController {
         return wagonService.countWagonByDepo(idDepo);
     }
 
-    //curl -v localhost:8088/wagon/sumOfSeatsByDepo/2
+    //curl -v localhost:8088/wagon/sumOfSeats/2
     @ResponseBody
-    @RequestMapping(value = "/sumOfSeatsByDepo/{idDepo}",method = RequestMethod.GET)
+    @RequestMapping(value = "/sumOfSeats/{idDepo}",method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Integer sumOfSeatsByDepo(@PathVariable(value = "idDepo") Integer idDepo){
         LOGGER.debug("rest:sumOfSeatsByDepo");

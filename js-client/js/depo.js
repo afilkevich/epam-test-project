@@ -16,13 +16,20 @@ $(document).on("click", "a", function() {
  });
 
 
+
  $('#btnDepoSave').click(function(){
-  if($('#depoId').val()=='')
-  addDepo();
-  else
+  if($('#depoId').val()!='')
+
   updateDepo();
   return false;
   });
+
+ $('#btnDepoAdd').click(function(){
+    if($('#newName').val()!='')
+
+    addDepo();
+    return false;
+    });
 
 getAllDepo();
 
@@ -89,7 +96,7 @@ function updateDepo(){
             contentType: 'application/json',
             url: depo + "/add",
             dataType: 'json',
-            data: formToJSON(),
+            data: formToAddJSON(),
             success: function (data, textStatus, jqXHR) {
                 alert('Depo created successfully');
                 console.log('Depo created successfully');
@@ -119,4 +126,12 @@ function formToJSON() {
         "id": id == "" ? null : id,
         "name": $('#name').val()
     });
-}
+
+ }
+  function formToAddJSON() {
+         var id = $('#depoId').val();
+         return JSON.stringify({
+             "id": id == "" ? null : id,
+             "name": $('#newName').val()
+         });
+  }

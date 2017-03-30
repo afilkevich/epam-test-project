@@ -84,23 +84,6 @@ public class WagonRestController {
         return wagonService.deleteWagon(idWagon);
     }
 
-    //curl -v localhost:8088/wagon/countOfWagon/1
-    @ResponseBody
-    @RequestMapping(value = "/countOfWagon/{idDepo}",method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public Integer countOfWagonByDepo(@PathVariable(value = "idDepo") Integer idDepo){
-        LOGGER.debug("rest:countOfWagonByDepo");
-        return wagonService.countWagonByDepo(idDepo);
-    }
-
-    //curl -v localhost:8088/wagon/sumOfSeats/2
-    @ResponseBody
-    @RequestMapping(value = "/sumOfSeats/{idDepo}",method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public Integer sumOfSeatsByDepo(@PathVariable(value = "idDepo") Integer idDepo){
-        LOGGER.debug("rest:sumOfSeatsByDepo");
-        return wagonService.sumOfSeatsByDepo(idDepo);
-    }
 
     //curl -v localhost:8088/wagon/getByDate/2015-08-01/2016-09-01
     @RequestMapping(value = "/getByDate/{from}/{to}",method = RequestMethod.GET)

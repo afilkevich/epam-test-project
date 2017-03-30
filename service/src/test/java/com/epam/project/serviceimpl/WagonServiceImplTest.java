@@ -88,20 +88,6 @@ public class WagonServiceImplTest {
         Assert.assertEquals(1,line);
     }
 
-    @Test
-    public void countWagonByDepo() throws Exception {
-        LOGGER.debug("test:countWagonByDepo");
-        int countDepoBy2=wagonService.countWagonByDepo(2);
-        Assert.assertEquals(2,countDepoBy2);
-    }
-
-    @Test
-    public void sumOfSeatsByDepo() throws Exception {
-        LOGGER.debug("test:sumOfSeatsByDepo");
-        int sum= wagonService.sumOfSeatsByDepo(2);
-        Assert.assertEquals(104,sum);
-    }
-
 
     @Test
     public void getWagonByDate() throws Exception {

@@ -16,7 +16,5 @@ public interface WagonDao {
     Wagon getWagonById(Integer id) throws DataAccessException;
     int updateWagon(Wagon wagon) throws DataAccessException;
     int deleteWagon(Integer id) throws DataAccessException;
-    Integer countWagonByDepo(Integer idDepo) throws DataAccessException;
-    Integer sumOfSeatsByDepo(Integer idDepo) throws DataAccessException;
     List<Wagon> getWagonByDate(LocalDate from, LocalDate to) throws DataAccessException;
 }

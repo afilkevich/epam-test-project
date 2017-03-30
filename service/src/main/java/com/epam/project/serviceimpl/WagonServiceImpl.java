@@ -134,48 +134,6 @@ public class WagonServiceImpl implements WagonService {
     }
 
     /**
-     * Returns the count of wagon in depo with the specified Id from database.
-     * @param idDepo id of the depo to return
-     * @return the count of wagon in depo with the specified Id from database
-     */
-    @Override
-    public Integer countWagonByDepo(Integer idDepo) throws DataAccessException {
-        LOGGER.debug("countWagonByDepo",idDepo);
-        Assert.notNull(idDepo);
-        Assert.isTrue(idDepo>0);
-        int count=0;
-        try {
-            count=wagonDao.countWagonByDepo(idDepo);
-        }
-        catch (Exception e){
-            LOGGER.debug("countWagonByDepo have exception",e);
-            throw new IllegalArgumentException();
-        }
-        return count;
-    }
-
-     /**
-     * Returns the sum of seats of wagons in depo with the specified Id from database.
-     * @param idDepo id of the depo to return
-     * @return Returns the summ of seats of wagons in depo with the specified Id from database.
-     */
-    @Override
-    public Integer sumOfSeatsByDepo(Integer idDepo) throws DataAccessException {
-        LOGGER.debug("sumOfSeatsByDepo",idDepo);
-        Assert.notNull(idDepo);
-        Assert.isTrue(idDepo>0);
-        int sum=0;
-        try {
-            sum=wagonDao.sumOfSeatsByDepo(idDepo);
-        }
-        catch (Exception e){
-            LOGGER.debug("sumOfSeatsByDepo have exception",e);
-            throw new IllegalArgumentException();
-        }
-        return sum;
-    }
-
-    /**
      * In case when we can have all entity of Wagon which build in duration .
      * @param from localdate which begin build
      * @param to localdate which finish build

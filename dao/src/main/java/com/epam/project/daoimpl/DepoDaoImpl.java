@@ -2,7 +2,7 @@ package com.epam.project.daoimpl;
 
 import com.epam.project.dao.DepoDao;
 import com.epam.project.model.Depo;
-import com.epam.project.model.Wagon;
+import com.epam.project.model.DepoDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +18,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -34,6 +33,8 @@ public class DepoDaoImpl implements DepoDao {
 
     static final String DEPO_ID="depo_id";
     static final String DEPO_NAME="name";
+    static final String DEPO_COUNT="count_wagon";
+    static final String DEPO_SUM="sum_seats";
 
 
      @Value("${depo.select}")
@@ -60,9 +61,9 @@ public class DepoDaoImpl implements DepoDao {
      * @return List of Depo  from ResultSet of SQL query.
      */
     @Override
-    public List<Depo> getAllDepo() throws DataAccessException {
+    public List<DepoDTO> getAllDepo() throws DataAccessException {
         LOGGER.debug("getallDepo");
-        return jdbcTemplate.query(getAllDepoSql,new DepoRowMapper());
+        return jdbcTemplate.query(getAllDepoSql,new DepoDTORowMapper());
     }
 
     /**
@@ -131,6 +132,21 @@ public class DepoDaoImpl implements DepoDao {
                     resultSet.getString(DEPO_NAME)
             );
             return depo;
+        }
+    }
+
+    private class DepoDTORowMapper implements  RowMapper<DepoDTO>{
+
+
+        @Override
+        public DepoDTO mapRow(ResultSet resultSet, int i) throws SQLException {
+            DepoDTO depoDTO=new DepoDTO(
+              resultSet.getInt(DEPO_ID),
+              resultSet.getString(DEPO_NAME),
+              resultSet.getInt(DEPO_COUNT),
+              resultSet.getInt(DEPO_SUM)
+            );
+            return depoDTO;
         }
     }
 

@@ -2,6 +2,7 @@ package com.epam.project.serviceimpl;
 
 import com.epam.project.dao.DepoDao;
 import com.epam.project.model.Depo;
+import com.epam.project.model.DepoDTO;
 import com.epam.project.service.DepoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +35,7 @@ public class DepoServiceImpl implements DepoService {
      * @return List of Depo  from database
      */
     @Override
-    public List<Depo> getAllDepo() throws DataAccessException {
+    public List<DepoDTO> getAllDepo() throws DataAccessException {
         LOGGER.debug("getAllDepo");
         return depoDao.getAllDepo();
     }

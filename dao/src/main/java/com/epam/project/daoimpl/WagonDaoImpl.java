@@ -27,14 +27,16 @@ public class WagonDaoImpl implements WagonDao {
 
     private static final Logger LOGGER= LogManager.getLogger();
 
+
+
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     static final String WAGON_ID="wagon_id";
     static final String WAGON_TYPE="type";
     static final String WAGON_ID_DEPO="d_id";
-    static final String WAGON_SEATS="count_seats";
-    static final String WAGON_DATE="date_build";
+    static final String WAGON_SEATS ="count_seats" ;
+    static final String WAGON_DATE = "date_build";
 
     @Value("${wagon.select}")
     String getAllWagonByDepoSql;
@@ -46,10 +48,6 @@ public class WagonDaoImpl implements WagonDao {
     String updateWagonSql;
     @Value("${wagon.delete}")
     String deleteWagonSql;
-    @Value("${wagon.count}")
-    String countWagonSql;
-    @Value("${wagon.sum}")
-    String sumSeatsSql;
     @Value("${wagon.selectbydate}")
     String selectByDateSql;
     @Value("${wagon.selectall}")
@@ -137,30 +135,6 @@ public class WagonDaoImpl implements WagonDao {
         LOGGER.debug("deleteWagon",id);
         SqlParameterSource sqlParameterSource=new MapSqlParameterSource("id",id);
         return namedParameterJdbcTemplate.update(deleteWagonSql,sqlParameterSource);
-    }
-
-    /**
-     * Returns the count of wagon in depo with the specified Id from database.
-     * @param idDepo id of the depo to return
-     * @return the count of wagon in depo with the specified Id from database
-     */
-    @Override
-    public Integer countWagonByDepo(Integer idDepo) throws DataAccessException {
-        LOGGER.debug("countWagonByDepo",idDepo);
-        SqlParameterSource sqlParameterSource=new MapSqlParameterSource("id",idDepo);
-        return namedParameterJdbcTemplate.queryForObject(countWagonSql,sqlParameterSource,Integer.class);
-    }
-
-    /**
-     * Returns the sum of seats of wagons in depo with the specified Id from database.
-     * @param idDepo id of the depo to return
-     * @return Returns the summ of seats of wagons in depo with the specified Id from database.
-     */
-    @Override
-    public Integer sumOfSeatsByDepo(Integer idDepo) throws DataAccessException {
-        LOGGER.debug("sumOfSeatsByDepo",idDepo);
-        SqlParameterSource sqlParameterSource=new MapSqlParameterSource("id",idDepo);
-        return namedParameterJdbcTemplate.queryForObject(sumSeatsSql,sqlParameterSource,Integer.class);
     }
 
     /**

@@ -80,19 +80,7 @@ public class WagonDaoImplTest {
         int a=wagonDao.deleteWagon(14176);
         Assert.assertEquals(1,a);
     }
-    @Test
-    public void countWagonBydepo() throws Exception{
-        LOGGER.debug("test:countOfWagonBydepo");
-        int count=wagonDao.countWagonByDepo(1);
-        Assert.assertEquals(2,count);
-    }
 
-    @Test
-    public void sumOfSeatsByDepo() throws Exception{
-        LOGGER.debug("test:sumOfSeatsByDepo");
-        int sum=wagonDao.sumOfSeatsByDepo(2);
-        Assert.assertEquals(104,sum);
-    }
 
     @Test
     public void getWagonByDate() throws Exception{

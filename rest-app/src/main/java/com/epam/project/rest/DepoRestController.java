@@ -1,6 +1,7 @@
 package com.epam.project.rest;
 
 import com.epam.project.model.Depo;
+import com.epam.project.model.DepoDTO;
 import com.epam.project.service.DepoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,9 +32,9 @@ public class DepoRestController {
     // curl -v localhost:8088/depo/getAll
     @ResponseBody
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)
-    public List<Depo> getAllDepo(){
+    public List<DepoDTO> getAllDepo(){
         LOGGER.debug("rest:getAllDepo");
-        List<Depo> depos=depoService.getAllDepo();
+        List<DepoDTO> depos=depoService.getAllDepo();
         return depos;
     }
 

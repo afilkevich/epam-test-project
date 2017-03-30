@@ -2,6 +2,7 @@ package com.epam.project.daoimpl;
 
 import com.epam.project.dao.DepoDao;
 import com.epam.project.model.Depo;
+import com.epam.project.model.DepoDTO;
 import com.epam.project.model.Wagon;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +33,7 @@ public class DepoImplTest {
     @Test
     public void getAllDepo() throws Exception {
         LOGGER.debug("test: getallDepo");
-        List<Depo> depos=depoDao.getAllDepo();
+        List<DepoDTO> depos=depoDao.getAllDepo();
         Assert.assertTrue(depos.size()>0);
     }
 

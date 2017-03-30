@@ -1,4 +1,5 @@
 import com.epam.project.model.Depo;
+import com.epam.project.model.DepoDTO;
 import com.epam.project.rest.DepoRestController;
 import com.epam.project.service.DepoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,7 +64,7 @@ public class DepoControllerMockTest {
     @Test
     public void getAllDepoTest() throws Exception{
         LOGGER.debug("test:rest:getAllDepo");
-    expect(depoService.getAllDepo()).andReturn(Arrays.<Depo>asList(new Depo(1,"p")));
+    expect(depoService.getAllDepo()).andReturn(Arrays.<DepoDTO>asList(new DepoDTO(1,"p")));
         replay(depoService);
 
         mockMvc.perform(

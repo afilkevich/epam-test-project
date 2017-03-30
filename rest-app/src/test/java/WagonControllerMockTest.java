@@ -151,32 +151,6 @@ public class WagonControllerMockTest {
 
     }
 
-    @Test
-    public void countOfByDepoTest() throws Exception{
-        LOGGER.debug("test:rest:countOfByDepo");
-        expect(wagonService.countWagonByDepo(anyInt())).andReturn(2);
-        replay(wagonService);
-
-        mockMvc.perform(
-                get("/wagon/countOfWagon/2")
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print()).andExpect(status().isOk())
-        .andExpect(content().string("2"));
-    }
-
-    @Test
-    public void sumOfSeatsByDepoTest() throws Exception{
-        LOGGER.debug("test:rest:sumOfSeatsByDepo");
-        expect(wagonService.sumOfSeatsByDepo(anyInt())).andReturn(38);
-        replay(wagonService);
-        mockMvc.perform(
-                get("/wagon/sumOfSeatsByDepo/2")
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("38"));
-
-    }
 
     @Test
     public void getByDate() throws Exception{

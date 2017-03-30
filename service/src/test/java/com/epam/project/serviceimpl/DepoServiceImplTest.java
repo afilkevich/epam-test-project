@@ -1,6 +1,7 @@
 package com.epam.project.serviceimpl;
 
 import com.epam.project.model.Depo;
+import com.epam.project.model.DepoDTO;
 import com.epam.project.service.DepoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,7 +34,7 @@ public class DepoServiceImplTest {
     @Test
     public void getAllDepo() throws Exception {
         LOGGER.debug("test: getallDepo");
-        List<Depo> depos=depoService.getAllDepo();
+        List<DepoDTO> depos=depoService.getAllDepo();
         Assert.assertEquals(2,depos.size());
 
     }
@@ -52,7 +53,7 @@ public class DepoServiceImplTest {
         LOGGER.debug("test:addDepo");
         Integer id=depoService.addDepo(testDepo);
         Assert.assertNotNull(id);
-        List<Depo> depos=depoService.getAllDepo();
+        List<DepoDTO> depos=depoService.getAllDepo();
         Assert.assertEquals(3,depos.size());
 
     }
@@ -70,7 +71,7 @@ public class DepoServiceImplTest {
     @Test
     public void deleteDepo() throws Exception {
         LOGGER.debug("test:deleteDepo");
-        List<Depo> depos=depoService.getAllDepo();
+        List<DepoDTO> depos=depoService.getAllDepo();
         int oldSize=depos.size();
        int line= depoService.deleteDepo(1);
         Assert.assertEquals(1,line);

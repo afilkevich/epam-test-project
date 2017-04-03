@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wagon</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<h1>Wagon</h1>
+
+<form id="WagonFormSelect">
+    <div class="mainArea">
+
+        <label>Date from:</label>
+        <input id="fromDate" name="from" type="text" required/>
+
+        <label>Date to:</label>
+        <input id="toDate" name="to" type="text" required>
+
+        <button id="btnWagonSelect">Select</button>
+
+    </div>
+</form>
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Type</th>
+            <th>Id of depo</th>
+            <th>Count of seat</th>
+            <th>Date of builder</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="wagonList">
+        </tbody>
+    </table>
+</div>
+<hr />
+
+<form id="wagonForm">
+    <div class="mainArea">
+
+        <label>Wagon id:</label>
+        <input id="wagonId" name="id" type="text" required/>
+
+        <label>Type:</label>
+        <input id="typeOfWagon" name="typeOfWagon" type="text" required/>
+
+        <label>Depo id:</label>
+        <input id="idDepo" name="idOfDepo" type="text" required/>
+
+        <label>Count of seat:</label>
+        <input id="count" name="countOfSeat" type="text" required/>
+
+        <label>Date of builder:</label>
+        <input id="date" name="dateOfBuilder" type="text" required/>
+
+
+        <button id="btnWagonSave">Add</button>
+        <button id="btnWagonUpdate">Update</button>
+        <button id="btnWagonClean">Clear</button>
+
+    </div>
+</form>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/main.js"></script>-->
+<script src="js/wagon.js"></script>
+</body>
+</html>

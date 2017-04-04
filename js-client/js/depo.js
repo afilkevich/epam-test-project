@@ -19,14 +19,12 @@ $(document).on("click", "a", function() {
 
  $('#btnDepoSave').click(function(){
   if($('#depoId').val()!='')
-
   updateDepo();
   return false;
   });
 
  $('#btnDepoAdd').click(function(){
     if($('#newName').val()!='')
-
     addDepo();
     return false;
     });

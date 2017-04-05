@@ -12,6 +12,12 @@ $(document).on("click", "a", function() {
     }
 });
 
+$('#btnWagonSave').click(function(){
+    if($('#wagonId').val()!='')
+    addWagon();
+    return false;
+    });
+
  $('#btnWagonClean').click(function(){
     $("#wagonId").val("");
     $("#typeOfWagon").val("");
@@ -71,5 +77,38 @@ function drawRow(wagon) {
               alert('delete wagon error: ' + errorThrown);
         }
         });
+ }
 
+ function addWagon() {
+         console.log('addWagon');
+         $.ajax({
+             type: 'POST',
+             contentType: 'application/json',
+             url: wagon + "/add",
+             dataType: 'json',
+             data: formToJSON(),
+             success: function (data, textStatus, jqXHR) {
+                 alert('Wagon created successfully');
+                 console.log('Wagon created successfully');
+                     $("#wagonId").val("");
+                     $("#typeOfWagon").val("");
+                     $("#idDepo").val("");
+                     $("#count").val("");
+                     $("#date").val("");
+                 getAllWagon();
+             },
+             error: function (jqXHR, textStatus, errorThrown) {
+                 alert('addWagon error: ' + errorThrown);
+             }
+         });
+   }
+
+  function formToJSON() {
+           return JSON.stringify({
+              "id": $('#wagonId').val(),
+              "type": $('#typeOfWagon').val(),
+              "depoId" : $('#idDepo').val(),
+              "countOfSeat" :$('#count').val(),
+              "dateOfBuilder" : $('#date').val()
+          });
    }

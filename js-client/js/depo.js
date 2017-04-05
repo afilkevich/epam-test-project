@@ -127,9 +127,9 @@ function formToJSON() {
 
  }
   function formToAddJSON() {
-         var id = $('#depoId').val();
+         //var id = $('#depoId').val();
          return JSON.stringify({
-             "id": id == "" ? null : id,
+             "id":  null,
              "name": $('#newName').val()
          });
   }

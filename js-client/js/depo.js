@@ -79,7 +79,7 @@ function updateDepo(){
         success:function(data,textStatus,jqXHR){
          alert('Depo updated succesfully');
           $("#depoId").val("");
-             $("#name").val("");
+          $("#name").val("");
          getAllDepo();
          },
          error:function(jqXHR,textStatus,errorThrown){

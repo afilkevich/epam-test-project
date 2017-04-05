@@ -18,11 +18,25 @@ $('#btnWagonSave').click(function(){
     return false;
     });
 
-    $('#btnWagonUpdate').click(function(){
+ $('#btnWagonUpdate').click(function(){
         if($('#wagonId').val()!='')
          updateWagon();
         return false;
-        });
+ });
+
+ $('#btnWagonSelect').click(function(){
+ if(($('#fromDate').val()!="")&($('#toDate').val()!="")){
+    var from=$('#fromDate').val();
+    var to=$('#toDate').val();
+    selectWagon(from,to);
+    return false;
+}
+else{
+alert('please,write date in form');
+}
+
+
+ });
 
  $('#btnWagonClean').click(function(){
     $("#wagonId").val("");
@@ -47,6 +61,20 @@ function getAllWagon(){
  }
 
 
+ function selectWagon(from,to){
+    $.ajax({
+    type: 'GET',
+    url: wagon +"/getByDate/"+from+"/"+to,
+     dataType:'json',
+     success: renderList,
+     error:function(jqXHR, textStatus, errorThrown){
+     console.log(jqXHR, textStatus, errorThrown);
+     alert('select wagon:'+textStatus +jqXHR);
+      }
+    });
+  }
+
+
 
 function renderList(data) {
     dto = data == null ? [] : (data instanceof Array ? data : [data]);
@@ -62,7 +90,7 @@ function drawRow(wagon) {
     $("#wagonList").append(row);
 
    row.append($("<td>" +wagon.id+'</td>'));
-   row.append($("<td>"   + wagon.type + '</td>'));
+   row.append($("<td>" + wagon.type + '</td>'));
    row.append($("<td>"  +wagon.depoId + '</td>'));
    row.append($("<td>" + wagon.countOfSeat + '</td>'));
    row.append($("<td>"+ wagon.dateOfBuilder +'</td>'))

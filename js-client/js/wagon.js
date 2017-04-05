@@ -18,6 +18,12 @@ $('#btnWagonSave').click(function(){
     return false;
     });
 
+    $('#btnWagonUpdate').click(function(){
+        if($('#wagonId').val()!='')
+         updateWagon();
+        return false;
+        });
+
  $('#btnWagonClean').click(function(){
     $("#wagonId").val("");
     $("#typeOfWagon").val("");
@@ -101,6 +107,29 @@ function drawRow(wagon) {
                  alert('addWagon error: ' + errorThrown);
              }
          });
+ }
+
+
+ function updateWagon(){
+           console.log('updateWagon');
+           $.ajax({
+           type:'PUT',
+           contentType:'application/json',
+           url:wagon+"/update",
+           data:formToJSON(),
+           success:function(data,textStatus,jqXHR){
+            alert('Wagon updated succesfully');
+                     $("#wagonId").val("");
+                     $("#typeOfWagon").val("");
+                     $("#idDepo").val("");
+                     $("#count").val("");
+                     $("#date").val("");
+            getAllWagon();
+            },
+            error:function(jqXHR,textStatus,errorThrown){
+            alert('updateWagon error: '+errorThrown);
+            }
+           });
    }
 
   function formToJSON() {

@@ -66,7 +66,7 @@ function getAllWagon(){
     type: 'GET',
     url: wagon +"/getByDate/"+from+"/"+to,
      dataType:'json',
-     success: renderList,
+     success: renderList ,
      error:function(jqXHR, textStatus, errorThrown){
      console.log(jqXHR, textStatus, errorThrown);
      alert('select wagon:'+textStatus +jqXHR);
@@ -79,6 +79,8 @@ function getAllWagon(){
 function renderList(data) {
     dto = data == null ? [] : (data instanceof Array ? data : [data]);
     $('#wagonList tr').remove();
+    $('#fromDate').val("");
+    $('#toDate').val('');
 
     $.each(dto, function (index, wagon) {
         drawRow(wagon);

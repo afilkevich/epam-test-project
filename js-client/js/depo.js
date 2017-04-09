@@ -18,9 +18,13 @@ $(document).on("click", "a", function() {
 
 
  $('#btnDepoSave').click(function(){
-  if($('#depoId').val()!='')
+  if(($('#depoId').val()!='')&&($('#name').val()!='')){
   updateDepo();
   return false;
+  }
+  else{
+  alert("please, write data in the form");
+  }
   });
 
  $('#btnDepoAdd').click(function(){

@@ -13,15 +13,22 @@ $(document).on("click", "a", function() {
 });
 
 $('#btnWagonSave').click(function(){
-    if($('#wagonId').val()!='')
+    if(($('#wagonId').val()!='')&&($('#typeOfWagon').val()!='')&&($('#idDepo').val()!='')&&($('#count').val()!='')&&($('#date').val()!='')){
     addWagon();
     return false;
+     }
+     else
+     alert("please, write data in the form's");
+
     });
 
  $('#btnWagonUpdate').click(function(){
-        if($('#wagonId').val()!='')
+         if(($('#wagonId').val()!='')&&($('#typeOfWagon').val()!='')&&($('#idDepo').val()!='')&&($('#count').val()!='')&&($('#date').val()!='')){
          updateWagon();
         return false;
+        }
+        else
+        alert("please, write data in the form's")
  });
 
  $('#btnWagonSelect').click(function(){

@@ -48,6 +48,18 @@ public class DepoServiceImplTest {
 
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void getDepoByNull() throws Exception{
+        LOGGER.debug("negative test: getDepoByNull");
+        Depo depo=depoService.getDepoById(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getFictitiousDepoById() throws Exception{
+        LOGGER.debug("negative test: getFictitiousDepoById");
+        Depo depo=depoService.getDepoById(8);
+    }
+
     @Test
     public void addDepo() throws Exception {
         LOGGER.debug("test:addDepo");
@@ -55,7 +67,12 @@ public class DepoServiceImplTest {
         Assert.assertNotNull(id);
         List<DepoDTO> depos=depoService.getAllDepo();
         Assert.assertEquals(3,depos.size());
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void addEmptyDepo() throws Exception{
+        LOGGER.debug("negative test: addEmptyDepo");
+        Integer id=depoService.addDepo(new Depo());
     }
 
     @Test
@@ -66,6 +83,13 @@ public class DepoServiceImplTest {
         int line=depoService.updateDepo(depo);
         Assert.assertEquals(line,1);
 
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void updateFictitiousDepo() throws Exception{
+        LOGGER.debug("negative test: updateFictitiousDepo");
+        Depo depo=new Depo(8,"Mosk");
+        depoService.updateDepo(depo);
     }
 
     @Test
@@ -79,5 +103,12 @@ public class DepoServiceImplTest {
         Assert.assertEquals(oldSize-1,depos.size());
 
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public  void deleteFictitiousDepo()throws Exception{
+        LOGGER.debug("negative test: deleteFictitiousDepo");
+        depoService.deleteDepo(9);
+    }
+
 
 }

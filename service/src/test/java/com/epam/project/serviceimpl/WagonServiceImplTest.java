@@ -44,8 +44,14 @@ public class WagonServiceImplTest {
          List<Wagon>wagons= wagonService.getAllWagonByDepo(1);
         Assert.assertEquals(2,wagons.size());
 
-
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getAllWagonByNullDepo() throws Exception{
+        LOGGER.debug("negative test:getAllWagonByNullDepo" );
+        List<Wagon> wagons=wagonService.getAllWagonByDepo(null);
+    }
+
 
     @Test
     public  void getAllWagon()throws Exception{
@@ -64,12 +70,25 @@ public class WagonServiceImplTest {
         Assert.assertEquals(oldsize+1,wagons.size());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public  void addEmptyWagon() throws Exception{
+        LOGGER.debug("negative test: addEmptyWagon");
+        wagonService.addWagon(new Wagon());
+    }
+
+
     @Test
     public void getWagonById() throws Exception {
         LOGGER.debug("test:getWagonById");
         Wagon wagon=wagonService.getWagonById(14176);
         Assert.assertNotNull(wagon);
         Assert.assertEquals((Integer) 14176,wagon.getId());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getWagonByFictitiousId() throws Exception{
+        LOGGER.debug("negative test: getWagonByFictitiousId");
+        Wagon wagon=wagonService.getWagonById(11);
     }
 
     @Test
@@ -81,6 +100,12 @@ public class WagonServiceImplTest {
         Assert.assertEquals(1,line);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void updateEmptyWagon() throws Exception{
+        LOGGER.debug("negative test: updateEmptyWagon");
+        wagonService.updateWagon(new Wagon());
+    }
+
     @Test
     public void deleteWagon() throws Exception {
         LOGGER.debug("test:deleteWagon");
@@ -88,6 +113,10 @@ public class WagonServiceImplTest {
         Assert.assertEquals(1,line);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteFictitiousDepo() throws Exception{
+        wagonService.deleteWagon(111);
+    }
 
     @Test
     public void getWagonByDate() throws Exception {
@@ -95,6 +124,18 @@ public class WagonServiceImplTest {
         List<Wagon> wagons=wagonService.getWagonByDate(from,to);
         Assert.assertEquals(2,wagons.size());
 
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getWagonByWrongDate() throws Exception{
+        LOGGER.debug("negative test:getWagonByWrongDate");
+        List<Wagon> wagons=wagonService.getWagonByDate(to,from);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getWagonByNullDate()throws Exception{
+        LOGGER.debug("negative test: getWafonByNullDate");
+        wagonService.getWagonByDate(to,null);
     }
 
 }

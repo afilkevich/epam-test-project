@@ -100,7 +100,8 @@ public class WagonServiceImpl implements WagonService {
     @Override
     public int updateWagon(Wagon wagon) throws DataAccessException {
         LOGGER.debug("updateWagon",wagon);
-        Assert.notNull(wagon);
+        Assert.notNull(wagon,"wagon must not be null");
+        Assert.notNull(wagon.getId());
         Assert.isTrue(wagon.getId()>0);
         Assert.hasText(wagon.getType(),"wagon must have type");
         Assert.notNull(wagon.getDateOfBuilder(),"wagon must have date of build");

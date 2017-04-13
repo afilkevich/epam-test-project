@@ -148,7 +148,7 @@ public class WagonServiceImpl implements WagonService {
         List<Wagon> wagons;
         try {
             wagons=wagonDao.getWagonByDate(from,to);
-            Assert.notEmpty(wagons);
+
         }
         catch (Exception e){
             LOGGER.debug("gerWagonByDate have exception",e);

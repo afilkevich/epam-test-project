@@ -52,7 +52,6 @@ public class DepoServiceImpl implements DepoService {
         Depo depo;
         try {
             depo=depoDao.getDepoById(id);
-            Assert.hasText(depo.getName(),"depo must have name");
         }
         catch (Exception e){
             LOGGER.debug("getDepoById have error",e);
@@ -79,7 +78,7 @@ public class DepoServiceImpl implements DepoService {
             LOGGER.debug("addDepo have exception",e);
             throw new IllegalArgumentException();
         }
-        Assert.notNull(id);
+
         return id;
     }
 

@@ -17,4 +17,5 @@ public class Wagon {
     private String type;
     private int depoId;
     private int countOfSeat;
+    private LocalDate dateOfBuild;
 }

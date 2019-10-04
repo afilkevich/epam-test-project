@@ -10,17 +10,17 @@ import java.util.List;
  * Created by master on 11.3.17.
  */
 public interface WagonDao {
-    List<Wagon> getAllWagonByDepo(Integer idDepo) throws DataAccessException;
+   // List<Wagon> getAllWagonByDepo(Integer idDepo) throws DataAccessException;
 
     List<Wagon> getAllWagon() throws DataAccessException;
 
-    void addWagon(Wagon wagon) throws DataAccessException;
-
-    Wagon getWagonById(Integer id) throws DataAccessException;
-
-    int updateWagon(Wagon wagon) throws DataAccessException;
-
-    int deleteWagon(Integer id) throws DataAccessException;
-
-    List<Wagon> getWagonByDate(LocalDate from, LocalDate to) throws DataAccessException;
+//    void addWagon(Wagon wagon) throws DataAccessException;
+//
+//    Wagon getWagonById(Integer id) throws DataAccessException;
+//
+//    int updateWagon(Wagon wagon) throws DataAccessException;
+//
+//    int deleteWagon(Integer id) throws DataAccessException;
+//
+//    List<Wagon> getWagonByDate(LocalDate from, LocalDate to) throws DataAccessException;
 }

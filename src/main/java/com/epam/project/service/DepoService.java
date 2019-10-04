@@ -13,11 +13,11 @@ import com.epam.project.model.DepoDTO;
 public interface DepoService {
     List<DepoDTO> getAllDepo() throws DataAccessException;
 
-    Depo getDepoById(Integer id) throws DataAccessException;
-
-    Integer addDepo(Depo depo) throws DataAccessException;
-
-    int updateDepo(Depo depo) throws DataAccessException;
-
-    int deleteDepo(Integer id) throws DataAccessException;
+//    Depo getDepoById(Integer id) throws DataAccessException;
+//
+//    Integer addDepo(Depo depo) throws DataAccessException;
+//
+//    int updateDepo(Depo depo) throws DataAccessException;
+//
+//    int deleteDepo(Integer id) throws DataAccessException;
 }

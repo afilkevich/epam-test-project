@@ -39,84 +39,84 @@ public class DepoServiceImpl implements DepoService {
         return depoDao.getAllDepo();
     }
 
-    /**
-     * Returns the depo with the specified Id from database.
-     * @param id
-     *            id of the depo to return
-     * @return the depo with the specified Id from the database
-     */
-    @Override
-    public Depo getDepoById(Integer id) throws DataAccessException {
-        LOGGER.debug("getDepoById", id);
-        Assert.notNull(id, "id nust not be null");
-        Depo depo;
-        try {
-            depo = depoDao.getDepoById(id);
-        } catch (Exception e) {
-            LOGGER.debug("getDepoById have error", e);
-            throw new IllegalArgumentException();
-
-        }
-        return depo;
-    }
-
-    /**
-     * Insert specified depo to the database
-     * @param depo
-     *            depo to be inserted to the database
-     * @return id of depo in database
-     */
-    @Override
-    public Integer addDepo(Depo depo) throws DataAccessException {
-        LOGGER.debug("addDepo", depo);
-        Assert.hasText(depo.getName(), "must have name");
-        Integer id;
-        try {
-            id = depoDao.addDepo(depo);
-        } catch (Exception e) {
-            LOGGER.debug("addDepo have exception", e);
-            throw new IllegalArgumentException();
-        }
-
-        return id;
-    }
-
-    /**
-     * Replaces the depo in the database with the specified depo.
-     * @param depo
-     *            to be updated in the database
-     */
-    @Override
-    public int updateDepo(Depo depo) throws DataAccessException {
-        LOGGER.debug("updateDepo", depo);
-        Assert.notNull(depo, "depo must be not null");
-        Assert.hasText(depo.getName(), "depo must have name");
-        Assert.notNull(depo.getId(), "if update depo must have id");
-
-        try {
-            Depo depoTest = depoDao.getDepoById(depo.getId());
-        } catch (Exception e) {
-            LOGGER.debug("have exception", e);
-            throw new IllegalArgumentException();
-        }
-        return depoDao.updateDepo(depo);
-    }
-
-    /**
-     * Delete depo from database
-     * @param id
-     *            of depo
-     */
-    @Override
-    public int deleteDepo(Integer id) throws DataAccessException {
-        Assert.notNull(id);
-        Depo depo;
-        try {
-            depo = depoDao.getDepoById(id);
-        } catch (Exception e) {
-            LOGGER.debug("have exeption", e);
-            throw new IllegalArgumentException();
-        }
-        return depoDao.deleteDepo(id);
-    }
+//    /**
+//     * Returns the depo with the specified Id from database.
+//     * @param id
+//     *            id of the depo to return
+//     * @return the depo with the specified Id from the database
+//     */
+//    @Override
+//    public Depo getDepoById(Integer id) throws DataAccessException {
+//        LOGGER.debug("getDepoById", id);
+//        Assert.notNull(id, "id nust not be null");
+//        Depo depo;
+//        try {
+//            depo = depoDao.getDepoById(id);
+//        } catch (Exception e) {
+//            LOGGER.debug("getDepoById have error", e);
+//            throw new IllegalArgumentException();
+//
+//        }
+//        return depo;
+//    }
+//
+//    /**
+//     * Insert specified depo to the database
+//     * @param depo
+//     *            depo to be inserted to the database
+//     * @return id of depo in database
+//     */
+//    @Override
+//    public Integer addDepo(Depo depo) throws DataAccessException {
+//        LOGGER.debug("addDepo", depo);
+//        Assert.hasText(depo.getName(), "must have name");
+//        Integer id;
+//        try {
+//            id = depoDao.addDepo(depo);
+//        } catch (Exception e) {
+//            LOGGER.debug("addDepo have exception", e);
+//            throw new IllegalArgumentException();
+//        }
+//
+//        return id;
+//    }
+//
+//    /**
+//     * Replaces the depo in the database with the specified depo.
+//     * @param depo
+//     *            to be updated in the database
+//     */
+//    @Override
+//    public int updateDepo(Depo depo) throws DataAccessException {
+//        LOGGER.debug("updateDepo", depo);
+//        Assert.notNull(depo, "depo must be not null");
+//        Assert.hasText(depo.getName(), "depo must have name");
+//        Assert.notNull(depo.getId(), "if update depo must have id");
+//
+//        try {
+//            Depo depoTest = depoDao.getDepoById(depo.getId());
+//        } catch (Exception e) {
+//            LOGGER.debug("have exception", e);
+//            throw new IllegalArgumentException();
+//        }
+//        return depoDao.updateDepo(depo);
+//    }
+//
+//    /**
+//     * Delete depo from database
+//     * @param id
+//     *            of depo
+//     */
+//    @Override
+//    public int deleteDepo(Integer id) throws DataAccessException {
+//        Assert.notNull(id);
+//        Depo depo;
+//        try {
+//            depo = depoDao.getDepoById(id);
+//        } catch (Exception e) {
+//            LOGGER.debug("have exeption", e);
+//            throw new IllegalArgumentException();
+//        }
+//        return depoDao.deleteDepo(id);
+//    }
 }

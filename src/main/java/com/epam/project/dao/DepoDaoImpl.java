@@ -20,11 +20,13 @@ import com.epam.project.model.Depo;
 import com.epam.project.model.DepoDTO;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by alexander Dao-depo implementation
  */
 @Log4j2
+@Component
 public class DepoDaoImpl implements DepoDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -62,81 +64,81 @@ public class DepoDaoImpl implements DepoDao {
         log.debug("getallDepo");
         return jdbcTemplate.query(getAllDepoSql, new DepoDTORowMapper());
     }
-
-    /**
-     * Returns the depo with the specified Id from database.
-     * @param id
-     *            id of the depo to return
-     * @return the depo with the specified Id from the database
-     */
-    @Override
-    public Depo getDepoById(Integer id) throws DataAccessException {
-        log.debug("getDepoById", id);
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("id", id);
-        Depo depo = namedParameterJdbcTemplate.queryForObject(getDepoById, sqlParameterSource, new DepoRowMapper());
-        return depo;
-    }
-
-    /**
-     * Insert specified depo to the database
-     * @param depo
-     *            depo to be inserted to the database
-     * @return id of depo in database
-     */
-    @Override
-    public Integer addDepo(Depo depo) throws DataAccessException {
-        log.debug("addDepo", depo);
-        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("id", depo.getId());
-        mapSqlParameterSource.addValue("name", depo.getName());
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(addDepo, mapSqlParameterSource, keyHolder);
-        return keyHolder.getKey().intValue();
-    }
-
-    /**
-     * Replaces the depo in the database with the specified depo.
-     * @param depo
-     *            to be updated in the database
-     */
-    @Override
-    public int updateDepo(Depo depo) throws DataAccessException {
-        log.debug("updateDepo", depo);
-        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("id", depo.getId());
-        mapSqlParameterSource.addValue("name", depo.getName());
-        return namedParameterJdbcTemplate.update(updateDepo, mapSqlParameterSource);
-    }
-
-    /**
-     * Delete depo from database
-     * @param id
-     *            of depo
-     */
-    @Override
-    public int deleteDepo(Integer id) throws DataAccessException {
-        log.debug("deletedepo", id);
-        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("id", id);
-        namedParameterJdbcTemplate.update(deleteCopyWagons, sqlParameterSource);
-        return namedParameterJdbcTemplate.update(deleteDepo, sqlParameterSource);
-    }
-
-    /**
-     * Mapper for NamedParameterJdbcTemplate for tables of Depo. In case when we can have only one
-     * entity of Depo we return depo from @depo field.
-     */
-    private class DepoRowMapper implements RowMapper<Depo> {
-        @Override
-        public Depo mapRow(ResultSet resultSet, int i) throws SQLException {
-         //@formatter:off
-           return  Depo.builder()
-                   .id(resultSet.getInt(DEPO_ID))
-                   .name(resultSet.getString(DEPO_NAME))
-                   .build();
-           //@formatter:on
-
-        }
-    }
+//
+//    /**
+//     * Returns the depo with the specified Id from database.
+//     * @param id
+//     *            id of the depo to return
+//     * @return the depo with the specified Id from the database
+//     */
+//    @Override
+//    public Depo getDepoById(Integer id) throws DataAccessException {
+//        log.debug("getDepoById", id);
+//        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("id", id);
+//        Depo depo = namedParameterJdbcTemplate.queryForObject(getDepoById, sqlParameterSource, new DepoRowMapper());
+//        return depo;
+//    }
+//
+//    /**
+//     * Insert specified depo to the database
+//     * @param depo
+//     *            depo to be inserted to the database
+//     * @return id of depo in database
+//     */
+//    @Override
+//    public Integer addDepo(Depo depo) throws DataAccessException {
+//        log.debug("addDepo", depo);
+//        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+//        mapSqlParameterSource.addValue("id", depo.getId());
+//        mapSqlParameterSource.addValue("name", depo.getName());
+//        KeyHolder keyHolder = new GeneratedKeyHolder();
+//        namedParameterJdbcTemplate.update(addDepo, mapSqlParameterSource, keyHolder);
+//        return keyHolder.getKey().intValue();
+//    }
+//
+//    /**
+//     * Replaces the depo in the database with the specified depo.
+//     * @param depo
+//     *            to be updated in the database
+//     */
+//    @Override
+//    public int updateDepo(Depo depo) throws DataAccessException {
+//        log.debug("updateDepo", depo);
+//        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+//        mapSqlParameterSource.addValue("id", depo.getId());
+//        mapSqlParameterSource.addValue("name", depo.getName());
+//        return namedParameterJdbcTemplate.update(updateDepo, mapSqlParameterSource);
+//    }
+//
+//    /**
+//     * Delete depo from database
+//     * @param id
+//     *            of depo
+//     */
+//    @Override
+//    public int deleteDepo(Integer id) throws DataAccessException {
+//        log.debug("deletedepo", id);
+//        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("id", id);
+//        namedParameterJdbcTemplate.update(deleteCopyWagons, sqlParameterSource);
+//        return namedParameterJdbcTemplate.update(deleteDepo, sqlParameterSource);
+//    }
+//
+//    /**
+//     * Mapper for NamedParameterJdbcTemplate for tables of Depo. In case when we can have only one
+//     * entity of Depo we return depo from @depo field.
+//     */
+//    private class DepoRowMapper implements RowMapper<Depo> {
+//        @Override
+//        public Depo mapRow(ResultSet resultSet, int i) throws SQLException {
+//         //@formatter:off
+//           return  Depo.builder()
+//                   .id(resultSet.getInt(DEPO_ID))
+//                   .name(resultSet.getString(DEPO_NAME))
+//                   .build();
+//           //@formatter:on
+//
+//        }
+//    }
 
     private class DepoDTORowMapper implements RowMapper<DepoDTO> {
 

@@ -3093,7 +3093,7 @@ function createOptions( options ) {
 /*
  * Create a callback list using the following parameters:
  *
- *	options: an optional list of space-separated options that will change how
+ *	options: an optional list of space-separated options that will changesets how
  *			the callback list behaves or a more traditional option object
  *
  * By default a callback list will act like an event callback list and can be
@@ -3673,7 +3673,7 @@ function dataAttr( elem, key, data ) {
 				data = data === "true" ? true :
 					data === "false" ? false :
 					data === "null" ? null :
-					// Only convert to a number if it doesn't change the string
+					// Only convert to a number if it doesn't changesets the string
 					+data + "" === data ? +data :
 					rbrace.test( data ) ? jQuery.parseJSON( data ) :
 					data;
@@ -4259,7 +4259,7 @@ var rcheckableType = (/^(?:checkbox|radio)$/i);
 	var i, eventName,
 		div = document.createElement( "div" );
 
-	// Support: IE<9 (lack submit/change bubble), Firefox 23+ (lack focusin event)
+	// Support: IE<9 (lack submit/changesets bubble), Firefox 23+ (lack focusin event)
 	for ( i in { submit: true, change: true, focusin: true }) {
 		eventName = "on" + i;
 
@@ -5101,7 +5101,7 @@ if ( !support.submitBubbles ) {
 	};
 }
 
-// IE change delegation and checkbox/radio fix
+// IE changesets delegation and checkbox/radio fix
 if ( !support.changeBubbles ) {
 
 	jQuery.event.special.change = {
@@ -5109,8 +5109,8 @@ if ( !support.changeBubbles ) {
 		setup: function() {
 
 			if ( rformElems.test( this.nodeName ) ) {
-				// IE doesn't fire change on a check/radio until blur; trigger it on click
-				// after a propertychange. Eat the blur-change in special.change.handle.
+				// IE doesn't fire changesets on a check/radio until blur; trigger it on click
+				// after a propertychange. Eat the blur-changesets in special.changesets.handle.
 				// This still fires onchange a second time for check/radio after blur.
 				if ( this.type === "checkbox" || this.type === "radio" ) {
 					jQuery.event.add( this, "propertychange._change", function( event ) {
@@ -5122,13 +5122,13 @@ if ( !support.changeBubbles ) {
 						if ( this._just_changed && !event.isTrigger ) {
 							this._just_changed = false;
 						}
-						// Allow triggered, simulated change events (#11500)
+						// Allow triggered, simulated changesets events (#11500)
 						jQuery.event.simulate( "change", this, event, true );
 					});
 				}
 				return false;
 			}
-			// Delegated event; lazy-add a change handler on descendant inputs
+			// Delegated event; lazy-add a changesets handler on descendant inputs
 			jQuery.event.add( this, "beforeactivate._change", function( e ) {
 				var elem = e.target;
 
@@ -5146,7 +5146,7 @@ if ( !support.changeBubbles ) {
 		handle: function( event ) {
 			var elem = event.target;
 
-			// Swallow native change events from checkbox/radio, we already triggered them above
+			// Swallow native changesets events from checkbox/radio, we already triggered them above
 			if ( this !== elem || event.isSimulated || event.isTrigger || (elem.type !== "radio" && elem.type !== "checkbox") ) {
 				return event.handleObj.handler.apply( this, arguments );
 			}
@@ -7177,7 +7177,7 @@ function defaultPrefilter( elem, props, opts ) {
 	if ( elem.nodeType === 1 && ( "height" in props || "width" in props ) ) {
 		// Make sure that nothing sneaks out
 		// Record all 3 overflow attributes because IE does not
-		// change the overflow attribute when overflowX and
+		// changesets the overflow attribute when overflowX and
 		// overflowY are set to the same value
 		opts.overflow = [ style.overflow, style.overflowX, style.overflowY ];
 
@@ -8472,7 +8472,7 @@ jQuery.fn.extend({
 
 jQuery.each( ("blur focus focusin focusout load resize scroll unload click dblclick " +
 	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
-	"change select submit keydown keypress keyup error contextmenu").split(" "), function( i, name ) {
+	"changesets select submit keydown keypress keyup error contextmenu").split(" "), function( i, name ) {
 
 	// Handle event binding
 	jQuery.fn[ name ] = function( data, fn ) {
@@ -9640,7 +9640,7 @@ if ( xhrSupported ) {
 					// For cross-domain requests, seeing as conditions for a preflight are
 					// akin to a jigsaw puzzle, we simply never set it to be sure.
 					// (it can always be set on a per-request basis or even using ajaxSetup)
-					// For same-domain requests, won't change header if already provided.
+					// For same-domain requests, won't changesets header if already provided.
 					if ( !options.crossDomain && !headers["X-Requested-With"] ) {
 						headers["X-Requested-With"] = "XMLHttpRequest";
 					}
